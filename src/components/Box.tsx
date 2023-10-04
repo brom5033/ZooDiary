@@ -10,9 +10,9 @@ const style = {
         overflowY: 'auto',
     },
     textBox: {
-      padding: '24px',
-      textWrap: 'wrap',
-    }
+        padding: '24px',
+        textWrap: 'wrap',
+    },
 } as const;
 
 export const Box: FC<PropsWithChildren> = ({ children }) => {

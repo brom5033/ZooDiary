@@ -1,7 +1,7 @@
-import React, { type FC } from 'react';
-import { Checkbox as MUICheckbox } from '@mui/material';
+import React, { type FC, type ChangeEvent } from 'react';
+import { Checkbox as MUICheckbox, FormControlLabel } from '@mui/material';
 
-// TODO: label 추가해야함
+
 const style = {
     checkbox: {
         '.MuiSvgIcon-root': {
@@ -10,6 +10,19 @@ const style = {
     },
 } as const;
 
-export const CheckBox: FC = () => {
-    return <MUICheckbox sx={style.checkbox} />;
+interface Props {
+    label: string;
+    onChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+    checked?: boolean;
+    indeterminate?: boolean;
+}
+export const CheckBox: FC<Props> = ({ label, onChange, checked, indeterminate }) => {
+    return (
+        <FormControlLabel
+            label={label}
+            control={
+                <MUICheckbox sx={style.checkbox} checked={checked} indeterminate={indeterminate} onChange={onChange} />
+            }
+        />
+    );
 };
