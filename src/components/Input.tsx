@@ -14,8 +14,11 @@ interface Props {
 export const Input: FC<Props> = ({ id, label, helperText, onChange, value, defaultValue, multiline }) => {
     const style = {
         input: {
-            '& .MuiInputBase-input': {
+            '& .MuiInputBase-root': {
                 borderRadius: '35px',
+                '& textarea': {
+                    height: multiline ? '170px !important' : '',
+                },
             },
             '& label.Mui-focused': {
                 color: '#353537',

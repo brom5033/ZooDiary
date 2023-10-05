@@ -19,6 +19,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </Box>
         <CheckBox label="박스" />
         <Input label='ddd' />
-        <Input label='mutiline' />
+        <Input label='mutiline' multiline/>
     </React.StrictMode>,
 );
