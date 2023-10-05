@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Button } from '@components/Button';
 import { Box } from '@components/Box';
 import { CheckBox } from '@components/CheckBox';
+import { Input } from '@components/Input';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -17,5 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             약관내용을 변경하는 경우에는 최소한 30일 이상의 사전
         </Box>
         <CheckBox label="박스" />
+        <Input label='ddd' />
+        <Input label='mutiline' />
     </React.StrictMode>,
 );

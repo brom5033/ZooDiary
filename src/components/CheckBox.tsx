@@ -16,6 +16,7 @@ interface Props {
     checked?: boolean;
     indeterminate?: boolean;
 }
+
 export const CheckBox: FC<Props> = ({ label, onChange, checked, indeterminate }) => {
     return (
         <FormControlLabel
