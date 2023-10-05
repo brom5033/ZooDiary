@@ -8,8 +8,8 @@ import { FileUpload } from '@components/FileUpload';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <Button outlined>dd</Button>
-        <Box>
+        <Button outlined>Zoo Diary</Button>
+        <Box mutiline>
             제 1장 총칙 제 1 조(목적) 본 약관은 국가공간정보포털 웹사이트(이하 "국가공간정보포털")가 제공하는 모든
             서비스(이하 "서비스")의 이용조건 및 절차, 회원과 국가공간정보포털의 권리, 의무, 책임사항과 기타 필요한
             사항을 규정함을 목적으로 합니다. 제 2 조(약관의 효력과 변경) 1. 국가공간정보포털은 이용자가 본 약관 내용에
@@ -19,8 +19,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             약관내용을 변경하는 경우에는 최소한 30일 이상의 사전
         </Box>
         <CheckBox label="박스" />
-        <Input label="ddd" />
-        <Input label="mutiline" multiline />
-        <FileUpload>ddd</FileUpload>
+        <Box>
+            <Input label="ddd" />
+            <Input label="mutiline" multiline />
+        </Box>
+        <Box>
+            <Box>
+                <FileUpload>Image</FileUpload>
+            </Box>
+        </Box>
     </React.StrictMode>,
 );
