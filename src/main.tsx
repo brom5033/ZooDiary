@@ -5,6 +5,7 @@ import { Box } from '@components/Box';
 import { CheckBox } from '@components/CheckBox';
 import { Input } from '@components/Input';
 import { FileUpload } from '@components/FileUpload';
+import '@assets/fonts/font.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
