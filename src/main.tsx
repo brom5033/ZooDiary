@@ -19,8 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             약관내용을 변경하는 경우에는 최소한 30일 이상의 사전
         </Box>
         <CheckBox label="박스" />
-        <Input label='ddd' />
-        <Input label='mutiline' multiline/>
+        <Input label="ddd" />
+        <Input label="mutiline" multiline />
         <FileUpload>ddd</FileUpload>
     </React.StrictMode>,
 );
