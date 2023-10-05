@@ -4,6 +4,7 @@ import { Button } from '@components/Button';
 import { Box } from '@components/Box';
 import { CheckBox } from '@components/CheckBox';
 import { Input } from '@components/Input';
+import { FileUpload } from '@components/FileUpload';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -20,5 +21,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <CheckBox label="박스" />
         <Input label='ddd' />
         <Input label='mutiline' multiline/>
+        <FileUpload>ddd</FileUpload>
     </React.StrictMode>,
 );
