@@ -5,6 +5,8 @@ import { Box } from '@components/Box';
 import { CheckBox } from '@components/CheckBox';
 import { Input } from '@components/Input';
 import { FileUpload } from '@components/FileUpload';
+import { Chip } from '@components/chip';
+// font
 import '@assets/fonts/font.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -29,5 +31,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 <FileUpload>Image</FileUpload>
             </Box>
         </Box>
+        <Chip label="기분좋아" color="hotpink" />
     </React.StrictMode>,
 );
