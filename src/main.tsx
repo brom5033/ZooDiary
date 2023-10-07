@@ -5,7 +5,8 @@ import { Box } from '@components/Box';
 import { CheckBox } from '@components/CheckBox';
 import { Input } from '@components/Input';
 import { FileUpload } from '@components/FileUpload';
-import { Chip } from '@components/chip';
+import { Chip } from '@components/Chip';
+import { ProfileIcon } from '@components/ProfileIcon';
 // font
 import '@assets/fonts/font.css';
 
@@ -32,5 +33,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             </Box>
         </Box>
         <Chip label="기분좋아" color="hotpink" />
+        <ProfileIcon />
     </React.StrictMode>,
 );
