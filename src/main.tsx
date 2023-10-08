@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Button } from '@components/Button';
 import { Box } from '@components/Box';
@@ -7,6 +7,7 @@ import { Input } from '@components/Input';
 import { FileUpload } from '@components/FileUpload';
 import { Chip } from '@components/Chip';
 import { ProfileIcon } from '@components/ProfileIcon';
+import { Card } from '@components/Card';
 // font
 import '@assets/fonts/font.css';
 
@@ -34,5 +35,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </Box>
         <Chip label="기분좋아" color="hotpink" />
         <ProfileIcon />
+        <Card title="ddddd">ddd</Card>
     </React.StrictMode>,
 );

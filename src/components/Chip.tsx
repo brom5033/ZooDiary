@@ -22,5 +22,5 @@ export const Chip: FC<Props> = ({ label, color }) => {
         },
     } as const;
 
-    return <MUIChip label={label} sx={style.chip} />;
+    return <MUIChip label={label} sx={style.chip} size='small' />;
 };
