@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "Cafe24Oneprettynight";
+  src: url("./Cafe24Oneprettynight-v2.0.woff");
+  font-display: swap;
+}
+
+*{
+  font-family: Cafe24Oneprettynight !important;
+}
