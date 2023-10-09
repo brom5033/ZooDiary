@@ -9,9 +9,11 @@ const colorPalette = {
     pink: '#FB9595',
 } as const;
 
+type ColorPalette = keyof typeof colorPalette;
+
 interface Props {
     label: ReactNode;
-    color: keyof typeof colorPalette;
+    color: ColorPalette;
 }
 
 export const Chip: FC<Props> = ({ label, color }) => {

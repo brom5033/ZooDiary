@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Button } from '@components/Button';
 import { Box } from '@components/Box';
@@ -8,8 +8,9 @@ import { FileUpload } from '@components/FileUpload';
 import { Chip } from '@components/Chip';
 import { ProfileIcon } from '@components/ProfileIcon';
 import { Card } from '@components/Card';
-// font
+// css
 import '@assets/fonts/font.css';
+import 'swiper/css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -35,6 +36,16 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </Box>
         <Chip label="기분좋아" color="hotpink" />
         <ProfileIcon />
-        <Card title="ddddd">ddd</Card>
+        <Card
+            title="ddddd"
+            labels={['기분좋아', '산책 다녀왔어']}
+            bodyText="적용됩니다. 2. 국가공간정보포털은 약관을 개정할 경우, 적용일자 및 개정사유를 명시하여 현행약관과 함께국가공간정보포털의 초기화면에 그 적용일 7일 이전부터 적용 전일까지 공지합니다. 단, 회원에 불리하게약관내용을 변경하는 경우에는 최소한 30일 이상의 사전"
+            clickNumber={30001000}
+            images={[
+                { src: 'https://placeholder.com/338x380', fileName: 'i love minjeong1' },
+                { src: 'https://placeholder.com/338x380', fileName: 'i love minjeong2' },
+                { src: 'https://placeholder.com/338x380', fileName: 'i love minjeong3' },
+            ]}
+        />
     </React.StrictMode>,
 );
