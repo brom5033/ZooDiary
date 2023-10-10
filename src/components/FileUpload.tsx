@@ -1,8 +1,8 @@
-import React, { type FC, type PropsWithChildren, type ChangeEventHandler } from 'react';
+import React, { type FC, type PropsWithChildren, type ChangeEvent } from 'react';
 import styled from '@emotion/styled';
 
 interface Props extends PropsWithChildren {
-    onChange?: ChangeEventHandler<HTMLInputElement>;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const FileUpload: FC<Props> = ({ children, onChange }) => {
