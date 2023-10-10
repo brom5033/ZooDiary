@@ -8,6 +8,7 @@ import { FileUpload } from '@components/FileUpload';
 import { Chip } from '@components/Chip';
 import { ProfileIcon } from '@components/ProfileIcon';
 import { Card } from '@components/Card';
+import { SubTitle } from '@components/SubTitle';
 // css
 import '@assets/fonts/font.css';
 import 'swiper/css';
@@ -49,5 +50,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             ]}
             time='Sat Sep 09 2023 00:00:00 GMT+0900'
         />
+        <SubTitle>10월 10일</SubTitle>
     </React.StrictMode>,
 );
