@@ -9,9 +9,11 @@ const colorPalette = {
     pink: '#FB9595',
 } as const;
 
+type ColorPalette = keyof typeof colorPalette;
+
 interface Props {
     label: ReactNode;
-    color: 'hotpink' | 'blue' | 'purple' | 'orange' | 'pink';
+    color: ColorPalette;
 }
 
 export const Chip: FC<Props> = ({ label, color }) => {
@@ -22,5 +24,5 @@ export const Chip: FC<Props> = ({ label, color }) => {
         },
     } as const;
 
-    return <MUIChip label={label} sx={style.chip} size='small' />;
+    return <MUIChip label={label} sx={style.chip} size="small" />;
 };

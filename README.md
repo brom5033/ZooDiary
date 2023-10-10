@@ -12,6 +12,9 @@ typescript, react, vite, ESLint, prettier, commitLint, husky, projectStructure, 
 ```bash
 yarn
 yarn dev
+
+// production
+yarn start
 ```
 
 ## Project structure

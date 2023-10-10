@@ -14,13 +14,15 @@
     "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.11",
+    "@mui/icons-material": "^5.14.12",
+    "@mui/material": "^5.14.12",
     "@stackflow/core": "^1.0.7",
     "@stackflow/react": "^1.1.4",
     "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "swiper": "^10.3.1",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
