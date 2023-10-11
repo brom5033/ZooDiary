@@ -5,13 +5,14 @@ interface Props extends PropsWithChildren {
     outlined?: boolean;
     dense?: boolean;
     danger?: boolean;
+    border?: boolean;
 }
 
-export const Button: FC<Props> = ({ children, outlined, dense, danger }) => {
+export const Button: FC<Props> = ({ children, outlined, dense, danger, border }) => {
     const commonStyle = {
-        borderRadius: '35px',
         width: '100%',
         height: dense ? '38px' : '61px',
+        borderRadius: border ? '35px' : '5px',
     } as const;
     const style = {
         button: {
