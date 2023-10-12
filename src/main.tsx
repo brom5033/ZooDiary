@@ -10,6 +10,7 @@ import { ProfileIcon } from '@components/ProfileIcon';
 import { Card } from '@components/Card';
 import { SubTitle } from '@components/SubTitle';
 import { Hr } from '@components/Hr';
+import { OverlayMenu } from '@components/OverlayMenu';
 // css
 import '@assets/fonts/font.css';
 import 'swiper/css';
@@ -53,5 +54,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         />
         <SubTitle>10월 10일</SubTitle>
         <Hr />
+
     </React.StrictMode>,
 );
