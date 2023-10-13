@@ -1,4 +1,4 @@
-import React, { type FC, type PropsWithChildren } from 'react';
+import React, { type FC, type PropsWithChildren, type MouseEventHandler } from 'react';
 import { Button as MUIButton } from '@mui/material';
 
 interface Props extends PropsWithChildren {
@@ -6,9 +6,10 @@ interface Props extends PropsWithChildren {
     dense?: boolean;
     danger?: boolean;
     border?: boolean;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const Button: FC<Props> = ({ children, outlined, dense, danger, border }) => {
+export const Button: FC<Props> = ({ children, outlined, dense, danger, border, onClick }) => {
     const commonStyle = {
         width: '100%',
         height: dense ? '38px' : '61px',
@@ -27,5 +28,9 @@ export const Button: FC<Props> = ({ children, outlined, dense, danger, border })
         },
     } as const;
 
-    return <MUIButton sx={outlined ? style.outlined : style.button}>{children}</MUIButton>;
+    return (
+        <MUIButton onClick={onClick} sx={outlined ? style.outlined : style.button}>
+            {children}
+        </MUIButton>
+    );
 };

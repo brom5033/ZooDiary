@@ -1,7 +1,8 @@
-import React, { type FC, type ReactNode, type ChangeEventHandler } from 'react';
+import React, { type ReactNode, type ChangeEventHandler, forwardRef } from 'react';
 import { TextField as MUITextFiled } from '@mui/material';
 
 interface Props {
+    type?: string;
     id?: string;
     label?: ReactNode;
     helperText?: ReactNode;
@@ -11,48 +12,52 @@ interface Props {
     multiline?: boolean;
 }
 
-export const Input: FC<Props> = ({ id, label, helperText, onChange, value, defaultValue, multiline }) => {
-    const style = {
-        input: {
-            '& .MuiInputBase-root': {
-                borderRadius: '35px',
-                '& textarea': {
-                    height: multiline ? '170px !important' : '',
+export const Input = forwardRef(
+    ({ type = 'text', id, label, helperText, onChange, value, defaultValue, multiline }: Props, ref) => {
+        const style = {
+            input: {
+                '& .MuiInputBase-root': {
+                    borderRadius: '35px',
+                    '& textarea': {
+                        height: multiline ? '170px !important' : '',
+                    },
+                },
+                '& label.Mui-focused': {
+                    color: '#353537',
+                },
+                '& .MuiInput-underline:after': {
+                    borderBottomColor: '#CACCBE',
+                },
+                '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                        borderColor: '#CACCBE',
+                    },
+                    '&:hover fieldset': {
+                        borderColor: '#CACCBE',
+                    },
+                    '&.Mui-focused fieldset': {
+                        borderColor: '#CACCBE',
+                    },
                 },
             },
-            '& label.Mui-focused': {
-                color: '#353537',
-            },
-            '& .MuiInput-underline:after': {
-                borderBottomColor: '#CACCBE',
-            },
-            '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                    borderColor: '#CACCBE',
-                },
-                '&:hover fieldset': {
-                    borderColor: '#CACCBE',
-                },
-                '&.Mui-focused fieldset': {
-                    borderColor: '#CACCBE',
-                },
-            },
-        },
-    } as const;
+        } as const;
 
-    return (
-        <MUITextFiled
-            sx={style.input}
-            id={id}
-            label={label}
-            helperText={helperText}
-            fullWidth
-            margin="dense"
-            size="small"
-            onChange={onChange}
-            value={value}
-            defaultValue={defaultValue}
-            multiline={multiline}
-        />
-    );
-};
+        return (
+            <MUITextFiled
+                inputRef={ref}
+                type={type}
+                sx={style.input}
+                id={id}
+                label={label}
+                helperText={helperText}
+                fullWidth
+                margin="dense"
+                size="small"
+                onChange={onChange}
+                value={value}
+                defaultValue={defaultValue}
+                multiline={multiline}
+            />
+        );
+    },
+);
