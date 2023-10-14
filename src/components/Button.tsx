@@ -6,10 +6,11 @@ interface Props extends PropsWithChildren {
     dense?: boolean;
     danger?: boolean;
     border?: boolean;
+    disabled?: boolean;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const Button: FC<Props> = ({ children, outlined, dense, danger, border, onClick }) => {
+export const Button: FC<Props> = ({ children, outlined, dense, danger, border, disabled, onClick }) => {
     const commonStyle = {
         width: '100%',
         height: dense ? '38px' : '61px',
@@ -29,7 +30,7 @@ export const Button: FC<Props> = ({ children, outlined, dense, danger, border, o
     } as const;
 
     return (
-        <MUIButton onClick={onClick} sx={outlined ? style.outlined : style.button}>
+        <MUIButton onClick={onClick} sx={outlined ? style.outlined : style.button} disabled={disabled}>
             {children}
         </MUIButton>
     );
