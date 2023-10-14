@@ -9,30 +9,109 @@ import { CheckBox } from '@components/CheckBox';
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 
-type Check = { [key in string]: boolean };
+type CheckType = null | 1 | 2 | 3 | 4 | 5 | 6;
+type Check = Record<string, CheckType>;
+interface CheckMessage {
+    id: Record<number, string>;
+    password: Record<number, string>;
+    passwordCheck: Record<number, string>;
+    nickName: Record<number, string>;
+}
+
+const checkMessage: CheckMessage = {
+    id: {
+        1: '🐕 2글자 이상 작성해야 해요',
+        2: '🐕 누군가 사용하고 있는 아이디에요',
+        3: '🐕 20글자 미만 작성 해야해요',
+        4: '🐕 특수문자는 사용할 수 없어요',
+        5: '🐕 닉네임과 다른 아이디를 사용해야 해요',
+        6: '🐕 한국어는 아이디로 사용할 수 없어요',
+    },
+    password: {
+        1: '🐕 8글자 이상 작성해야 해요',
+        2: '🐕 누군가 사용하고 있는 닉네임이에요',
+        3: '🐕 40글자 미만 작성해야 해요',
+        4: '🐕 한국어는 비밀번호로 사용할 수 없어요',
+    },
+    passwordCheck: {
+        1: '🐕 비밀번호가 일치하지 않아요',
+    },
+    nickName: {
+        1: '🐕 2글자 이상 작성해야 해요',
+        2: '🐕 누군가 사용하고 있는 닉네임이에요',
+        3: '🐕 20글자 미만 작성해야 해요',
+        4: '🐕 특수문자는 사용할 수 없어요',
+    },
+} as const;
 
 export const SignUp: ActivityComponentType = () => {
     const nickNameRef = useRef<HTMLInputElement>();
+    const idRef = useRef<HTMLInputElement>();
+    const passwordRef = useRef<HTMLInputElement>();
+    const passwordCheckRef = useRef<HTMLInputElement>();
 
     const [check, setCheck] = useState<Check>({
-        id: true,
-        password: true,
-        passwordCheck: true,
-        nickName: true,
+        id: null,
+        password: null,
+        passwordCheck: null,
+        nickName: null,
     });
 
     const submit = () => {
-        const checkObj: Check = check;
+        const checkObj: Check = {
+            id: null,
+            password: null,
+            passwordCheck: null,
+            nickName: null,
+        };
 
         // Input 정보
         const nickName = nickNameRef?.current?.value ?? '';
+        const id = idRef?.current?.value ?? '';
+        const password = passwordRef?.current?.value ?? '';
+        const passwordCheck = passwordCheckRef?.current?.value ?? '';
 
-        // 조건 필터링
-        checkObj.nickName = nickName.length > 3;
+        const specialCharacter = /[~!@#$%^&*()_+|<>?:{}]/;
+        // 닉네임 조건 필터링
+        if (nickName.length < 1) {
+            checkObj.nickName = 1;
+        } else if (nickName.length > 20) {
+            checkObj.nickName = 3;
+        } else if (specialCharacter.test(nickName)) {
+            checkObj.nickName = 4;
+        }
+
+        const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+        // 아이디 조건 필터링
+        if (id.length < 1) {
+            checkObj.id = 1;
+        } else if (id.length > 20) {
+            checkObj.id = 3;
+        } else if (specialCharacter.test(id)) {
+            checkObj.id = 4;
+        } else if (nickName === id) {
+            checkObj.id = 5;
+        } else if (korean.test(id)) {
+            checkObj.id = 6;
+        }
+
+        // 비밀번호 조건 필터링
+        if (password.length <= 8) {
+            checkObj.password = 1;
+        } else if (password.length > 40) {
+            checkObj.password = 3;
+        } else if (korean.test(password)) {
+            checkObj.password = 4;
+        }
+
+        // 비밀번호 체크 조건 필터링
+        if (password !== passwordCheck) {
+            checkObj.passwordCheck = 1;
+        }
 
         // 가입 가능 여부
         setCheck({ ...checkObj });
-        if (Object.keys(checkObj).filter((key) => !checkObj[key]).length > 0) {
+        if (Object.keys(checkObj).filter((key) => checkObj[key]).length > 0) {
             console.log('회원가입 실패');
             return;
         }
@@ -70,11 +149,26 @@ export const SignUp: ActivityComponentType = () => {
                                 ref={nickNameRef}
                                 type="text"
                                 label="닉네임"
-                                helperText={check.nickName === false && '누군가 사용하고 있는 것 같아요'}
+                                helperText={checkMessage.nickName[check.nickName ?? 0] ?? ''}
                             />
-                            <Input type="text" label="아이디" />
-                            <Input type="password" label="비밀번호" />
-                            <Input type="password" label="비밀번호 확인" />
+                            <Input
+                                ref={idRef}
+                                type="text"
+                                label="아이디"
+                                helperText={checkMessage.id[check.id ?? 0] ?? ''}
+                            />
+                            <Input
+                                ref={passwordRef}
+                                type="password"
+                                label="비밀번호"
+                                helperText={checkMessage.password[check.password ?? 0] ?? ''}
+                            />
+                            <Input
+                                ref={passwordCheckRef}
+                                type="password"
+                                label="비밀번호 확인"
+                                helperText={checkMessage.passwordCheck[check.passwordCheck ?? 0] ?? ''}
+                            />
                         </Box>
                     </Stack>
                 </Stack>
