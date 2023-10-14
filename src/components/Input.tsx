@@ -39,6 +39,9 @@ export const Input = forwardRef(
                         borderColor: '#CACCBE',
                     },
                 },
+                "& p" :{
+                    color: '#BF4158'
+                },
             },
         } as const;
 
