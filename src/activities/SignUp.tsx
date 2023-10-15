@@ -12,6 +12,8 @@ import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { userModel } from '@stores/user';
 import { useLocalStorage } from '@hooks/useLocalStorage';
+import { useLogin } from '@hooks/api/useLogin';
+import { useSignUp } from '@hooks/api/useSignup';
 // constants
 import { agreement } from '@constants/agreement';
 
@@ -126,30 +128,16 @@ export const SignUp: ActivityComponentType = () => {
         if (Object.keys(checkObj).filter((key) => checkObj[key]).length > 0) {
             return;
         }
-
-        axios
-            .post('http://localhost:3000/api/v1/signup', {
-                user: id,
-                password: password,
-                nickName: nickName,
-            })
+        useSignUp(id, password, nickName)
             .then(() => {
-                axios
-                    .post('http://localhost:3000/api/v1/login', {
-                        user: id,
-                        password: password,
-                    })
-                    .then(({ data }) => {
-                        const { user, nickName, token } = data.data;
-;
-                        // todo: user, nickName은 External Store에 저장
-                        userModelStore.setUser(user, nickName);
+                useLogin(id, password).then(({ data }) => {
+                    const { user, nickName, token } = data.data;
 
-                        // todo: token은 로컬스토리지에 저장, useLocalStorage 커스텀 훅을 만들어서 사용
-                        setToken(token);
-                        
-                        replace('Board', {});
-                    });
+                    userModelStore.setUser(user, nickName);
+                    setToken(token);
+
+                    replace('Board', {});
+                });
             })
             .catch((error) => {
                 const errorMessage = error.response.data.data;
