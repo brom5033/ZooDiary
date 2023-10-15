@@ -1,9 +1,9 @@
 import React, { useRef, useState, type ChangeEvent } from 'react';
-import { type ActivityComponentType } from '@stackflow/react';
-import { AppScreen } from '@components/AppScreen';
+import type { ActivityComponentType } from '@stackflow/react';
 import Stack from '@mui/material/Stack';
 import { useFlow } from 'stackflow';
 // component
+import { AppScreen } from '@components/AppScreen';
 import { SubTitle } from '@components/SubTitle';
 import { Box } from '@components/Box';
 import { CheckBox } from '@components/CheckBox';
@@ -12,7 +12,7 @@ import { Button } from '@components/Button';
 import { userModel } from '@stores/user';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { useLogin } from '@hooks/api/useLogin';
-import { useSignUp } from '@hooks/api/useSignup';
+import { useSignUp } from '@hooks/api/useSignUp';
 // constants
 import { agreement } from '@constants/agreement';
 

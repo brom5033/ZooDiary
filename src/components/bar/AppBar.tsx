@@ -13,14 +13,20 @@ export const AppBar: FC = () => {
     const style = {
         header: {
             color: '#353537',
-						marginTop: '12px'
+            padding: '10px 12px',
+            height: '30px',
         },
-
+        button: {
+            position: 'absolute',
+            top: '14px',
+            left: '12px'
+        }
     } as const;
+
     return (
         <Container disableGutters component="header" sx={style.header}>
             <Logo />
-            <Icon onClick={backNavigation}>
+            <Icon onClick={backNavigation} sx={style.button}>
                 <ArrowBackIcon />
             </Icon>
         </Container>
