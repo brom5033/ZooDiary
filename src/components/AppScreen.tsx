@@ -1,25 +1,24 @@
 import React, { type FC, type ReactNode, type PropsWithChildren } from 'react';
-import { AppBar } from '@components/molecules/AppBar';
-import { MenuBar } from '@components/molecules/MenuBar';
+import { AppBar } from '@components/bar/AppBar';
+import { MenuBar } from '@components/bar/MenuBar';
 import { AppScreen as StackFlowAppScreen } from '@stackflow/plugin-basic-ui';
 import { Container } from '@mui/material';
 
+const style = {
+    spacing: {
+        paddingTop: '24px',
+    },
+} as const;
 interface Props extends PropsWithChildren {
     main?: boolean;
     sub?: boolean;
 }
 export const AppScreen: FC<Props> = ({ children, main, sub }) => {
-    const style = {
-        container: {
-            color: 'red',
-        },
-    } as const;
-
     return (
         <StackFlowAppScreen>
             {main && <MenuBar />}
             {sub && <AppBar />}
-            <Container component="main" sx={style.container}>
+            <Container component="main" sx={style.spacing}>
                 {children}
             </Container>
         </StackFlowAppScreen>
