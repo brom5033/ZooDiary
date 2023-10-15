@@ -2,12 +2,16 @@ import React, { useRef, useState, type ChangeEvent } from 'react';
 import { type ActivityComponentType } from '@stackflow/react';
 import { AppScreen } from '@components/AppScreen';
 import Stack from '@mui/material/Stack';
+import axios from 'axios';
+import { useFlow } from 'stackflow';
 // component
 import { SubTitle } from '@components/SubTitle';
 import { Box } from '@components/Box';
 import { CheckBox } from '@components/CheckBox';
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
+import { userModel } from '@stores/user';
+import { useLocalStorage } from '@hooks/useLocalStorage';
 // constants
 import { agreement } from '@constants/agreement';
 
@@ -47,6 +51,11 @@ const checkMessage: CheckMessage = {
 } as const;
 
 export const SignUp: ActivityComponentType = () => {
+    const { replace } = useFlow();
+
+    const userModelStore = userModel();
+    const [, setToken] = useLocalStorage('token');
+
     const nickNameRef = useRef<HTMLInputElement>();
     const idRef = useRef<HTMLInputElement>();
     const passwordRef = useRef<HTMLInputElement>();
@@ -113,13 +122,43 @@ export const SignUp: ActivityComponentType = () => {
         }
 
         // 가입 가능 여부
-        setCheck({ ...checkObj });
+        setCheck(checkObj);
         if (Object.keys(checkObj).filter((key) => checkObj[key]).length > 0) {
-            console.log('회원가입 실패');
             return;
         }
 
-        console.log('회원가입 성공');
+        axios
+            .post('http://localhost:3000/api/v1/signup', {
+                user: id,
+                password: password,
+                nickName: nickName,
+            })
+            .then(() => {
+                axios
+                    .post('http://localhost:3000/api/v1/login', {
+                        user: id,
+                        password: password,
+                    })
+                    .then(({ data }) => {
+                        const { user, nickName, token } = data.data;
+;
+                        // todo: user, nickName은 External Store에 저장
+                        userModelStore.setUser(user, nickName);
+
+                        // todo: token은 로컬스토리지에 저장, useLocalStorage 커스텀 훅을 만들어서 사용
+                        setToken(token);
+                        
+                        replace('Board', {});
+                    });
+            })
+            .catch((error) => {
+                const errorMessage = error.response.data.data;
+                if (errorMessage === 'user') {
+                    setCheck({ ...check, id: 2 });
+                } else if (errorMessage === 'nickName') {
+                    setCheck({ ...check, nickName: 2 });
+                }
+            });
     };
 
     const handleChange1 = (event: ChangeEvent<HTMLInputElement>) => {
