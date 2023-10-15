@@ -2,7 +2,6 @@ import React, { useRef, useState, type ChangeEvent } from 'react';
 import { type ActivityComponentType } from '@stackflow/react';
 import { AppScreen } from '@components/AppScreen';
 import Stack from '@mui/material/Stack';
-import axios from 'axios';
 import { useFlow } from 'stackflow';
 // component
 import { SubTitle } from '@components/SubTitle';
@@ -149,15 +148,15 @@ export const SignUp: ActivityComponentType = () => {
             });
     };
 
-    const handleChange1 = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleTotalChange = (event: ChangeEvent<HTMLInputElement>) => {
         setChecked([event.target.checked, event.target.checked]);
     };
 
-    const handleChange2 = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleTermsChange = (event: ChangeEvent<HTMLInputElement>) => {
         setChecked([event.target.checked, checked[1]]);
     };
 
-    const handleChange3 = (event: ChangeEvent<HTMLInputElement>) => {
+    const handlePrivacyChange = (event: ChangeEvent<HTMLInputElement>) => {
         setChecked([checked[0], event.target.checked]);
     };
 
@@ -166,11 +165,11 @@ export const SignUp: ActivityComponentType = () => {
             <Stack spacing={5}>
                 <Stack>
                     <SubTitle>보호자 동의</SubTitle>
-                    <CheckBox label="전체동의" checked={checked[0] && checked[1]} onChange={handleChange1} />
+                    <CheckBox label="전체동의" checked={checked[0] && checked[1]} onChange={handleTotalChange} />
                     <Box multiline>{agreement.agree}</Box>
-                    <CheckBox label="동의 (필수)" checked={checked[0]} onChange={handleChange2} />
+                    <CheckBox label="동의 (필수)" checked={checked[0]} onChange={handleTermsChange} />
                     <Box multiline>{agreement.privacy}</Box>
-                    <CheckBox label="동의 (필수)" checked={checked[1]} onChange={handleChange3} />
+                    <CheckBox label="동의 (필수)" checked={checked[1]} onChange={handlePrivacyChange} />
                 </Stack>
                 <Stack>
                     <SubTitle>보호자 정보</SubTitle>
