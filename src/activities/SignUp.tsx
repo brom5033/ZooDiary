@@ -12,7 +12,7 @@ import { Button } from '@components/Button';
 import { userModel } from '@stores/user';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { useLogin } from '@hooks/api/useLogin';
-import { useSignUp } from '@hooks/api/useSignup';
+import { useSignUp } from '@hooks/api/useSignUp';
 // constants
 import { agreement } from '@constants/agreement';
 
