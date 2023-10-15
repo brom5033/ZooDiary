@@ -1,15 +1,19 @@
 import React, { type FC } from 'react';
 import { Container } from '@mui/material';
-import { useFlow } from 'stackflow';
 
 import { Logo } from '@components/Logo';
 
-export const MenuBar: FC = () => {
-    const { push } = useFlow();
-    const goBoardPage = () => push('Board', {});
+const style = {
+    header: {
+        color: '#353537',
+        padding: '10px 12px',
+        height: '30px',
+    },
+} as const;
 
+export const MenuBar: FC = () => {
     return (
-        <Container onClick={goBoardPage}>
+        <Container disableGutters component="header" sx={style.header}>
             <Logo />
         </Container>
     );

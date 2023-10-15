@@ -9,6 +9,6 @@ const style = {
     },
 };
 
-export const Logo = () => {
+export const Logo:FC = () => {
     return <div style={style.logo}>Zoo Diary</div>;
 };

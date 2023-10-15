@@ -1,4 +1,4 @@
-import React, { type FC, type ReactNode, type PropsWithChildren } from 'react';
+import React, { type FC, type PropsWithChildren } from 'react';
 import { AppBar } from '@components/bar/AppBar';
 import { MenuBar } from '@components/bar/MenuBar';
 import { AppScreen as StackFlowAppScreen } from '@stackflow/plugin-basic-ui';
@@ -7,6 +7,8 @@ import { Container } from '@mui/material';
 const style = {
     spacing: {
         paddingTop: '24px',
+        height: 'calc(100vh - 30px)',
+        display: 'flex',
     },
 } as const;
 interface Props extends PropsWithChildren {

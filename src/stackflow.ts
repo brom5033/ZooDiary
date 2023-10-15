@@ -7,7 +7,7 @@ import { Login } from './activities/Login';
 import { SignUp } from './activities/SignUp';
 import { Writing } from './activities/Writing';
 import { Board } from './activities/Board';
-import { Mypage } from './activities/MyPage';
+import { MyPage } from './activities/MyPage';
 
 export const { Stack, useFlow } = stackflow({
     transitionDuration: 350,
@@ -22,7 +22,7 @@ export const { Stack, useFlow } = stackflow({
         Login,
         Writing,
         Board,
-        Mypage,
+        MyPage,
     },
     initialActivity: () => 'Login',
 });
