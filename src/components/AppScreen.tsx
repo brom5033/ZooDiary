@@ -20,7 +20,7 @@ export const AppScreen: FC<Props> = ({ children, main, sub }) => {
         <StackFlowAppScreen>
             {main && <MenuBar />}
             {sub && <AppBar />}
-            <Container component="main" sx={style.spacing}>
+            <Container component="main" sx={style.spacing} maxWidth={false}>
                 {children}
             </Container>
         </StackFlowAppScreen>

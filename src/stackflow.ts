@@ -24,5 +24,5 @@ export const { Stack, useFlow } = stackflow({
         Board,
         MyPage,
     },
-    initialActivity: () => 'Login',
+    initialActivity: () => 'Board',
 });
