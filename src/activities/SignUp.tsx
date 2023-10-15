@@ -1,9 +1,9 @@
 import React, { useRef, useState, type ChangeEvent } from 'react';
 import { type ActivityComponentType } from '@stackflow/react';
-import { AppScreen } from '@components/AppScreen';
 import Stack from '@mui/material/Stack';
 import { useFlow } from 'stackflow';
 // component
+import { AppScreen } from '@components/AppScreen';
 import { SubTitle } from '@components/SubTitle';
 import { Box } from '@components/Box';
 import { CheckBox } from '@components/CheckBox';
