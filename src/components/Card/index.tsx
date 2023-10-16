@@ -1,4 +1,4 @@
-import React, { type FC, useState } from 'react';
+import { type FC, useState } from 'react';
 import { Card as MUICard, CardHeader, CardContent, CardActions, Typography, Icon } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';

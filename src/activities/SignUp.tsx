@@ -1,4 +1,4 @@
-import React, { useRef, useState, type ChangeEvent } from 'react';
+import { useRef, useState, type ChangeEvent } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import Stack from '@mui/material/Stack';
 import { useFlow } from 'stackflow';

@@ -1,4 +1,4 @@
-import React, { type FC, type PropsWithChildren, type ReactNode, useState } from 'react';
+import { type FC, type PropsWithChildren, type ReactNode, useState } from 'react';
 import { Stack, Drawer } from '@mui/material';
 
 interface Props extends PropsWithChildren {

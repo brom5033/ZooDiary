@@ -1,4 +1,4 @@
-import React, { type FC, type PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { Box as MUIBox } from '@mui/material';
 
 interface Props extends PropsWithChildren {

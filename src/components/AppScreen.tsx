@@ -1,4 +1,4 @@
-import React, { type FC, type PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { AppBar } from '@components/bar/AppBar';
 import { MenuBar } from '@components/bar/MenuBar';
 import { MyPageBar } from '@components/bar/MyPageBar';

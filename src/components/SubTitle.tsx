@@ -1,4 +1,4 @@
-import React, { type FC, type PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import Typography from '@mui/material/Typography';
 
 interface Props extends PropsWithChildren {
@@ -9,7 +9,7 @@ export const SubTitle: FC<Props> = ({ children, marginZero }) => {
     const style = {
         subtitle: {
             color: '#353537',
-            marginBottom: marginZero ? '0': '0.35em'
+            marginBottom: marginZero ? '0' : '0.35em',
         },
     } as const;
 

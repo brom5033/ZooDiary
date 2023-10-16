@@ -1,4 +1,4 @@
-import React, { type FC, PropsWithChildren } from 'react';
+import type { FC } from 'react';
 import { useFlow } from 'stackflow';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Container, Icon } from '@mui/material';
@@ -19,8 +19,8 @@ export const AppBar: FC = () => {
         button: {
             position: 'absolute',
             top: '14px',
-            left: '12px'
-        }
+            left: '12px',
+        },
     } as const;
 
     return (

@@ -1,4 +1,4 @@
-import React, { type FC, PropsWithChildren } from 'react';
+import type { FC } from 'react';
 import { useFlow } from 'stackflow';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Container, Icon } from '@mui/material';
@@ -20,7 +20,7 @@ export const MyPageBar: FC = () => {
             position: 'absolute',
             top: '14px',
             right: '12px',
-        }
+        },
     } as const;
 
     return (

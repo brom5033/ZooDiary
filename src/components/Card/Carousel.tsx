@@ -1,4 +1,4 @@
-import React, { type FC, type CSSProperties } from 'react';
+import type { FC, CSSProperties } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { CardMedia } from '@mui/material';

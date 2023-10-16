@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import type { FC } from 'react';
 import { IconButton } from '@mui/material';
 //component
 import { OverlayMenu } from '@components/OverlayMenu';

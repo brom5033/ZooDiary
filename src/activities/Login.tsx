@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { Stack } from '@mui/material';
 // component
