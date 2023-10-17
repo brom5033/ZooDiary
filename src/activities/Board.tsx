@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { userModel } from '@stores/user';
 import { Stack } from '@mui/material';
 // component
 import { AppScreen } from '@components/AppScreen';
-import { Box } from '@components/Box';
 import { SubTitle } from '@components/SubTitle';
 import { Hr } from '@components/Hr';
-
 import { Card } from '@components/Card';
-// todo: appbar 마이페이지 아이콘 설정
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { BorderButton } from '@components/BorderButton';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import { Button } from '@components/Button';
 
 const response = [
     {
@@ -55,6 +54,15 @@ const style = {
     stack: {
         width: '100%',
     },
+    box: {
+        width: '60px',
+        position: 'absolute',
+        bottom: '20px',
+        right: '20px',
+    },
+    iconColor: {
+        color: '#353537',
+    },
 } as const;
 
 export const Board: ActivityComponentType = () => {
@@ -65,7 +73,7 @@ export const Board: ActivityComponentType = () => {
 
     const id = 'idd';
     return (
-        <AppScreen main>
+        <AppScreen page>
             <Stack sx={style.stack} gap="60px">
                 <Stack>
                     <SubTitle marginZero>{formatDate(lastPost.createdAt)}</SubTitle>
@@ -73,6 +81,11 @@ export const Board: ActivityComponentType = () => {
                 </Stack>
                 <Card title={id} labels={['기분좋아']} bodyText={id} clickNumber={11} time={lastPost.createdAt} />
                 <Card title={id} labels={['기분좋아']} bodyText={id} clickNumber={11} time={lastPost.createdAt} />
+                <div style={style.box}>
+                    <Button border>
+                        <EditNoteIcon sx={style.iconColor} />
+                    </Button>
+                </div>
             </Stack>
         </AppScreen>
     );
