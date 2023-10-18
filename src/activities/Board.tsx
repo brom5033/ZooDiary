@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { userModel } from '@stores/user';
 import { Stack } from '@mui/material';
+import { useFlow } from 'stackflow';
 // component
 import { AppScreen } from '@components/AppScreen';
 import { SubTitle } from '@components/SubTitle';
 import { Hr } from '@components/Hr';
 import { Card } from '@components/Card';
-import { BorderButton } from '@components/BorderButton';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { Button } from '@components/Button';
 
@@ -42,7 +42,7 @@ interface Post {
     user: string;
     nickName: string;
 }
-
+// TODO:utils로 옮기기
 const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const month = date.toLocaleString('default', { month: 'long' });
@@ -66,8 +66,17 @@ const style = {
 } as const;
 
 export const Board: ActivityComponentType = () => {
-    const userModelStore = userModel();
     const [token] = useLocalStorage('token');
+
+    const { push, replace } = useFlow();
+
+    useEffect(() => {
+        if (!token()) {
+            replace('Login', {});
+        }
+    }, []);
+
+    const gotoWriting = () => push('Writing', {});
 
     const lastPost = response[0];
 
@@ -82,7 +91,7 @@ export const Board: ActivityComponentType = () => {
                 <Card title={id} labels={['기분좋아']} bodyText={id} clickNumber={11} time={lastPost.createdAt} />
                 <Card title={id} labels={['기분좋아']} bodyText={id} clickNumber={11} time={lastPost.createdAt} />
                 <div style={style.box}>
-                    <Button border>
+                    <Button border onClick={gotoWriting}>
                         <EditNoteIcon sx={style.iconColor} />
                     </Button>
                 </div>

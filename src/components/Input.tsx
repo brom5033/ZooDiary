@@ -1,4 +1,4 @@
-import { type ReactNode, type ChangeEventHandler, forwardRef } from 'react';
+import { type ReactNode, type ChangeEventHandler, type KeyboardEvent, forwardRef } from 'react';
 import { TextField as MUITextFiled } from '@mui/material';
 
 interface Props {
@@ -10,10 +10,11 @@ interface Props {
     value?: unknown;
     defaultValue?: unknown;
     multiline?: boolean;
+    onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
 }
 
 export const Input = forwardRef(
-    ({ type = 'text', id, label, helperText, onChange, value, defaultValue, multiline }: Props, ref) => {
+    ({ type = 'text', id, label, helperText, onChange, onKeyDown, value, defaultValue, multiline }: Props, ref) => {
         const style = {
             input: {
                 '& .MuiInputBase-root': {
@@ -60,6 +61,7 @@ export const Input = forwardRef(
                 value={value}
                 defaultValue={defaultValue}
                 multiline={multiline}
+                onKeyDown={onKeyDown}
             />
         );
     },
