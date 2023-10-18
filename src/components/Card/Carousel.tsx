@@ -1,10 +1,12 @@
 import { type FC, type CSSProperties, type ChangeEvent, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore from 'swiper';
 import { Pagination } from 'swiper/modules';
-import { CardMedia } from '@mui/material';
+import { CardMedia, Box as MUIBox } from '@mui/material';
 import { Box } from '@components/Box';
 import { FileUpload } from '@components/FileUpload';
 import { AddPhotoAlternate } from '@mui/icons-material';
+import styled from '@emotion/styled';
 // props
 import { Props as CardProps } from '.';
 import { ImageModel } from '@stores/image';
@@ -15,7 +17,19 @@ const style = {
         '--swiper-pagination-color': '#DC88A0',
         '--swiper-pagination-bullet-inactive-color': '#353537',
     },
-};
+    imageBox: {
+        background: 'black',
+        height: '100%',
+        alignSelf: 'center',
+        display: 'flex',
+    },
+    fileBox: {
+        width: '120px',
+        margin: 'auto',
+        marginBottom: '60px',
+        textAlign: 'center',
+    },
+} as const;
 
 interface Props {
     images?: CardProps['images'];
@@ -24,14 +38,17 @@ interface Props {
 
 export const Carousel: FC<Props> = ({ images, upload }) => {
     const [carouselImages, setCarouselImages] = useState(images);
+    const [carouselPage, setCarouselPage] = useState<SwiperCore>();
     const imageModelStore = ImageModel();
 
     useEffect(() => {
         setCarouselImages(images);
     }, [images]);
 
-    const handleChange = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
-        if (!carouselImages) return;
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const index = carouselPage?.activeIndex;
+
+        if (!carouselImages || index === undefined) return;
 
         // 사용자 화면에 이미지 보여주기
         const file = event.target.files?.[0] as File;
@@ -61,32 +78,33 @@ export const Carousel: FC<Props> = ({ images, upload }) => {
             spaceBetween={20}
             modules={[Pagination]}
             pagination={{ clickable: true }}
+            onSwiper={setCarouselPage}
         >
-            {carouselImages?.map(({ src, fileName }, index) => (
-                <SwiperSlide key={fileName}>
+            {carouselImages?.map(({ src, fileName }) => (
+                <Slider key={fileName}>
                     {upload && src === '' ? (
-                        <Box
-                            sx={{
-                                width: '120px',
-                                height: '85px',
-                                margin: 'auto',
-                                marginBottom: '60px',
-                                textAlign: 'center',
-                            }}
-                        >
-                            <FileUpload onChange={handleChange(index)}>
+                        <Box sx={style.fileBox}>
+                            <FileUpload onChange={handleChange}>
                                 <AddPhotoAlternate />
                             </FileUpload>
                         </Box>
-                    ) : upload ? (
-                        <FileUpload onChange={handleChange(index)}>
-                            <CardMedia component="img" image={src} alt={fileName} />
-                        </FileUpload>
+                    ) : upload && src !== '' ? (
+                        <MUIBox sx={style.imageBox}>
+                            <FileUpload onChange={handleChange}>
+                                <CardMedia component="img" src={src} alt={fileName} width="100%" />
+                            </FileUpload>
+                        </MUIBox>
                     ) : (
-                        <CardMedia component="img" image={src} alt={fileName} />
+                        <MUIBox sx={style.imageBox}>
+                            <CardMedia component="img" src={src} alt={fileName} width="100%" />
+                        </MUIBox>
                     )}
-                </SwiperSlide>
+                </Slider>
             ))}
         </Swiper>
     );
 };
+
+const Slider = styled(SwiperSlide)`
+    height: auto;
+`;
