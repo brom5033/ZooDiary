@@ -1,6 +1,5 @@
-import React, { type FC, type ChangeEvent } from 'react';
+import type { FC, ChangeEvent } from 'react';
 import { Checkbox as MUICheckbox, FormControlLabel } from '@mui/material';
-
 
 const style = {
     checkbox: {

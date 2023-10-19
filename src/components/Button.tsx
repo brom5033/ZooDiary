@@ -1,4 +1,4 @@
-import React, { type FC, type PropsWithChildren, type MouseEventHandler } from 'react';
+import type { FC, PropsWithChildren, MouseEventHandler } from 'react';
 import { Button as MUIButton } from '@mui/material';
 
 interface Props extends PropsWithChildren {

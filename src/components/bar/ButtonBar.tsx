@@ -2,10 +2,11 @@ import type { FC } from 'react';
 import { useFlow } from 'stackflow';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Container, Icon } from '@mui/material';
-
+// component
 import { Logo } from '@components/Logo';
+import { Logout } from '@components/Logout';
 
-export const AppBar: FC = () => {
+export const ButtonBar: FC = () => {
     const { pop } = useFlow();
 
     const backNavigation = () => pop();
@@ -16,7 +17,7 @@ export const AppBar: FC = () => {
             padding: '10px 12px',
             height: '30px',
         },
-        button: {
+        icon: {
             position: 'absolute',
             top: '14px',
             left: '12px',
@@ -26,9 +27,10 @@ export const AppBar: FC = () => {
     return (
         <Container disableGutters component="header" sx={style.header}>
             <Logo />
-            <Icon onClick={backNavigation} sx={style.button}>
+            <Icon onClick={backNavigation} sx={style.icon}>
                 <ArrowBackIcon />
             </Icon>
+            <Logout />
         </Container>
     );
 };

@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { useFlow } from 'stackflow';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Container, Icon } from '@mui/material';
-
+// component
 import { Logo } from '@components/Logo';
 
-export const AppBar: FC = () => {
-    const { pop } = useFlow();
+export const MyPageBar: FC = () => {
+    const { push } = useFlow();
 
-    const backNavigation = () => pop();
+    const MyPageNavigation = () => push('MyPage', {});
 
     const style = {
         header: {
@@ -19,15 +19,15 @@ export const AppBar: FC = () => {
         button: {
             position: 'absolute',
             top: '14px',
-            left: '12px',
+            right: '12px',
         },
     } as const;
 
     return (
         <Container disableGutters component="header" sx={style.header}>
             <Logo />
-            <Icon onClick={backNavigation} sx={style.button}>
-                <ArrowBackIcon />
+            <Icon onClick={MyPageNavigation} sx={style.button}>
+                <AccountCircleIcon />
             </Icon>
         </Container>
     );

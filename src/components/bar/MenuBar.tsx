@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import type { FC } from 'react';
 import { Container } from '@mui/material';
 
 import { Logo } from '@components/Logo';

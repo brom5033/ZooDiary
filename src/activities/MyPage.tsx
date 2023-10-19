@@ -1,7 +1,7 @@
-import React from 'react';
 import { type ActivityComponentType } from '@stackflow/react';
-import { Box } from '@components/Box';
+// component
+import { AppScreen } from '@components/AppScreen';
 
 export const MyPage: ActivityComponentType = () => {
-	return <Box ></Box>;
+    return <AppScreen logout></AppScreen>;
 };

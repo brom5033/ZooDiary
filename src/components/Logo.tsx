@@ -1,5 +1,4 @@
-import React, { type FC } from 'react';
-
+import type { FC } from 'react';
 
 const style = {
     logo: {
@@ -9,6 +8,6 @@ const style = {
     },
 };
 
-export const Logo:FC = () => {
+export const Logo: FC = () => {
     return <div style={style.logo}>Zoo Diary</div>;
 };

@@ -6,3 +6,4 @@ export const useLogin = (user: string, password: string) => {
     password,
   });
 }
+

@@ -1,13 +1,20 @@
-import React, { type FC, type PropsWithChildren, type ChangeEvent } from 'react';
+import type { FC, PropsWithChildren, ChangeEvent } from 'react';
 import styled from '@emotion/styled';
 
+const style = {
+    label: {
+        alignSelf: 'center',
+        width: '100%',
+    },
+}as const;
+
 interface Props extends PropsWithChildren {
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const FileUpload: FC<Props> = ({ children, onChange }) => {
     return (
-        <Label htmlFor="file">
+        <Label htmlFor="file" style={style.label}>
             {children}
             <Input id="file" type="file" onChange={onChange} accept="image/*" />
         </Label>

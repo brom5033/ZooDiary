@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState, type KeyboardEvent } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { Stack } from '@mui/material';
 // component
@@ -48,18 +48,25 @@ export const Login: ActivityComponentType = () => {
             });
     };
 
+    const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            submit();
+        }
+    };
+
     return (
         <AppScreen main>
             <Stack gap="50px">
                 <SubTitle>로그인</SubTitle>
                 <Box>
                     <Input
+                        onKeyDown={handleOnKeyDown}
                         ref={idRef}
                         type="text"
                         label="아이디"
                         helperText={Check && '🐕 계정 정보가 틀린거 같아요'}
                     />
-                    <Input ref={passwordRef} type="password" label="비밀번호" />
+                    <Input onKeyDown={handleOnKeyDown} ref={passwordRef} type="password" label="비밀번호" />
                 </Box>
                 <Stack gap="14px">
                     <Button border onClick={submit}>
