@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
-import { userModel } from '@stores/user';
 import { Stack } from '@mui/material';
 import { useFlow } from 'stackflow';
 // component
@@ -11,6 +10,7 @@ import { Hr } from '@components/Hr';
 import { Card } from '@components/Card';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { Button } from '@components/Button';
+
 
 const response = [
     {
