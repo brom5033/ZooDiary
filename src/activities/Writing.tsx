@@ -11,6 +11,7 @@ import { Button } from '@components/Button';
 import { usePostWrite } from '@hooks/api/usePostWrite';
 import { Chip } from '@components/Chip';
 import { ImageModel } from '@stores/image';
+import { useFlow } from 'stackflow';
 
 const style = {
     chip: {
@@ -36,17 +37,18 @@ const style = {
 } as const;
 
 export const Writing: ActivityComponentType = () => {
+    const { pop } = useFlow();
     const [texted, setTexted] = useState<string>();
     const [feel, setFeel] = useState<string>();
     const [job, setJob] = useState({
         food: false,
         walking: false,
     });
-    const ImageModelStore = ImageModel()
+    const ImageModelStore = ImageModel();
 
-    useEffect(()=>{
-        ImageModelStore.emptyImage()
-    },[])
+    useEffect(() => {
+        ImageModelStore.emptyImage();
+    }, []);
 
     const handleFeelClick = (label: string) => () => {
         setFeel(label);
@@ -68,6 +70,19 @@ export const Writing: ActivityComponentType = () => {
 
     const handleTextChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setTexted(event.target.value);
+    };
+
+    const upLoad = () => {
+        const picture = ImageModelStore.getImage()
+            ?.map(({ src }) => src)
+            .join(',') as string;
+        const content = texted as string;
+        const chips = [feel, job.food ? '간식 먹었어' : null, job.walking ? '산책 다녀왔어' : null]
+            .filter((element) => element)
+            .join(',');
+        usePostWrite(picture, content, chips).then(() => {
+            pop();
+        });
     };
 
     return (
@@ -135,7 +150,7 @@ export const Writing: ActivityComponentType = () => {
                     <Input multiline border type="text" label="일기" onChange={handleTextChange} maxLength={250} />
                     <div style={{ width: '100%', textAlign: 'right' }}>{texted?.length ?? 0}/250</div>
                 </Stack>
-                <Button border>작성하기</Button>
+                <Button border onClick={upLoad}>작성하기</Button>
             </Stack>
         </AppScreen>
     );
