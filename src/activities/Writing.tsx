@@ -11,6 +11,29 @@ import { Button } from '@components/Button';
 import { usePostWrite } from '@hooks/api/usePostWrite';
 import { Chip } from '@components/Chip';
 
+const style = {
+    chip: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        paddingLeft: '6px',
+    },
+    outer: {
+        height: '40px',
+        padding: 0,
+    },
+    inner: {
+        textAlign: 'center',
+        height: '100%',
+        padding: '6px',
+    },
+    chipNoLeft: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+    },
+} as const;
+
 export const Writing: ActivityComponentType = () => {
     const [texted, setTexted] = useState<string>();
 
@@ -35,65 +58,25 @@ export const Writing: ActivityComponentType = () => {
                                 <Carousel upload images={uploadImage} />
                             </Box>
                             <Stack>
-                                <Box border noGutter sx={{ height: '40px', padding: 0 }}>
-                                    <Grid container sx={{ textAlign: 'center', height: '100%', padding: '6px' }}>
-                                        <Grid
-                                            item
-                                            xs={4}
-                                            sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
-                                        >
+                                <Box border noGutter sx={style.outer}>
+                                    <Grid container sx={style.inner}>
+                                        <Grid item xs={4} sx={style.chipNoLeft}>
                                             <Chip color="hotpink" label="기분좋아" />
                                         </Grid>
-                                        <Grid
-                                            item
-                                            xs={4}
-                                            sx={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                justifyContent: 'center',
-                                                paddingLeft: '6px',
-                                            }}
-                                        >
+                                        <Grid item xs={4} sx={style.chip}>
                                             <Chip color="blue" label="평범해" />
                                         </Grid>
-                                        <Grid
-                                            item
-                                            xs={4}
-                                            sx={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                justifyContent: 'center',
-                                                paddingLeft: '6px',
-                                            }}
-                                        >
+                                        <Grid item xs={4} sx={style.chip}>
                                             <Chip color="purple" label="기분나빠" />
                                         </Grid>
                                     </Grid>
                                 </Box>
-                                <Box border noGutter sx={{ height: '40px', padding: 0 }}>
-                                    <Grid container sx={{ textAlign: 'center', height: '100%', padding: '6px' }}>
-                                        <Grid
-                                            item
-                                            xs={6}
-                                            sx={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                justifyContent: 'center',
-                                                paddingLeft: '6px',
-                                            }}
-                                        >
+                                <Box border noGutter sx={style.outer}>
+                                    <Grid container sx={style.inner}>
+                                        <Grid item xs={6} sx={style.chipNoLeft}>
                                             <Chip color="orange" label="산책 다녀왔어" />
                                         </Grid>
-                                        <Grid
-                                            item
-                                            xs={6}
-                                            sx={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                justifyContent: 'center',
-                                                paddingLeft: '6px',
-                                            }}
-                                        >
+                                        <Grid item xs={6} sx={style.chip}>
                                             <Chip color="pink" label="간식 먹었어" />
                                         </Grid>
                                     </Grid>
