@@ -9,10 +9,12 @@ import 'swiper/css/pagination';
 import { Stack } from 'stackflow';
 import '@stackflow/plugin-basic-ui/index.css';
 // component
+import { ProfileImage } from '@components/ProfileImage';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <CssBaseline />
-        <Stack />
+        < ProfileImage />
+        {/* <Stack /> */}
     </React.StrictMode>,
 );
