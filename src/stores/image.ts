@@ -9,6 +9,7 @@ interface ImageModel {
     data: Image[];
     getImage: () => Image[] | undefined;
     setImage: (index: number, src: string, fileName: string) => void;
+    emptyImage: () => void;
 }
 
 export const ImageModel = create<ImageModel>((set, get) => ({
@@ -33,5 +34,12 @@ export const ImageModel = create<ImageModel>((set, get) => ({
         set({ data: newData });
     },
 
-    emptyUser: () => set({ data: undefined }),
+    emptyImage: () =>
+        set({
+            data: [
+                { src: '', fileName: '1' },
+                { src: '', fileName: '2' },
+                { src: '', fileName: '3' },
+            ],
+        }),
 }));

@@ -61,8 +61,7 @@ export const Carousel: FC<Props> = ({ images, upload }) => {
             };
 
             useFileUpload(file).then((response) => {
-                console.log(response);
-                imageModelStore.setImage(index, '', carouselImages[index].fileName);
+                imageModelStore.setImage(index, response.data.data, carouselImages[index].fileName);
             });
 
             setCarouselImages([...carouselImages]);
@@ -91,12 +90,12 @@ export const Carousel: FC<Props> = ({ images, upload }) => {
                     ) : upload && src !== '' ? (
                         <MUIBox sx={style.imageBox}>
                             <FileUpload onChange={handleChange}>
-                                <CardMedia component="img" src={src} alt={fileName} width="100%" />
+                                <CardMedia component="img" src={`http://localhost:3000${src}`} alt={fileName} width="100%" />
                             </FileUpload>
                         </MUIBox>
                     ) : (
                         <MUIBox sx={style.imageBox}>
-                            <CardMedia component="img" src={src} alt={fileName} width="100%" />
+                            <CardMedia component="img" src={`http://localhost:3000${src}`} alt={fileName} width="100%" />
                         </MUIBox>
                     )}
                 </Slider>
