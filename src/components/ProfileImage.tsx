@@ -1,6 +1,6 @@
 import { type FC, type ChangeEvent, useState } from 'react';
 import { AddPhotoAlternate } from '@mui/icons-material';
-//component
+// component
 import { FileUpload } from '@components/FileUpload';
 import { Box } from '@components/Box';
 

@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent, useEffect } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { Stack, Grid } from '@mui/material';
+import { useFlow } from 'stackflow';
 // component
 import { Box } from '@components/Box';
 import { AppScreen } from '@components/AppScreen';
@@ -11,7 +12,8 @@ import { Button } from '@components/Button';
 import { usePostWrite } from '@hooks/api/usePostWrite';
 import { Chip } from '@components/Chip';
 import { ImageModel } from '@stores/image';
-import { useFlow } from 'stackflow';
+import { useGetPost } from '@hooks/api/useGetPost';
+import { postModel } from '@stores/post';
 
 const style = {
     chip: {
@@ -38,6 +40,7 @@ const style = {
 
 export const Writing: ActivityComponentType = () => {
     const { pop } = useFlow();
+    const postModelStore = postModel();
     const [texted, setTexted] = useState<string>();
     const [feel, setFeel] = useState<string>();
     const [job, setJob] = useState({
@@ -75,19 +78,23 @@ export const Writing: ActivityComponentType = () => {
     const upLoad = () => {
         const picture = ImageModelStore.getImage()
             ?.map(({ src }) => src)
+            .filter((src) => src)
             .join(',') as string;
         const content = texted as string;
         const chips = [feel, job.food ? '간식 먹었어' : null, job.walking ? '산책 다녀왔어' : null]
             .filter((element) => element)
             .join(',');
         usePostWrite(picture, content, chips).then(() => {
-            pop();
+            useGetPost().then((response) => {
+                postModelStore.setPost(response.data.data);
+                pop();
+            });
         });
     };
 
     return (
         <AppScreen sub>
-            <Stack sx={{ width: '100%' }} gap={'30px'}>
+            <Stack sx={{ width: '100%' }} gap="30px">
                 <SubTitle>글쓰기</SubTitle>
                 <Stack gap="12px">
                     <Box border>
@@ -103,7 +110,7 @@ export const Writing: ActivityComponentType = () => {
                                                 color="hotpink"
                                                 label="기분좋아"
                                                 onClick={handleFeelClick('기분좋아')}
-                                                active={'기분좋아' === feel}
+                                                active={feel === '기분좋아'}
                                             />
                                         </Grid>
                                         <Grid item xs={4} sx={style.chip}>
@@ -111,7 +118,7 @@ export const Writing: ActivityComponentType = () => {
                                                 color="blue"
                                                 label="평범해"
                                                 onClick={handleFeelClick('평범해')}
-                                                active={'평범해' === feel}
+                                                active={feel === '평범해'}
                                             />
                                         </Grid>
                                         <Grid item xs={4} sx={style.chip}>
@@ -119,7 +126,7 @@ export const Writing: ActivityComponentType = () => {
                                                 color="purple"
                                                 label="기분나빠"
                                                 onClick={handleFeelClick('기분나빠')}
-                                                active={'기분나빠' === feel}
+                                                active={feel === '기분나빠'}
                                             />
                                         </Grid>
                                     </Grid>

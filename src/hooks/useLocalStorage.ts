@@ -1,5 +1,5 @@
 type StateSetter<T> = (newData: T) => void;
-type StateGetter = () => any;
+type StateGetter = () => unknown;
 
 export const useLocalStorage = <T>(key: string, initData?: T): [StateGetter, StateSetter<T>] => {
     if (initData) {

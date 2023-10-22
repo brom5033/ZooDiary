@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { Stack } from '@mui/material';
@@ -11,20 +11,20 @@ import { Hr } from '@components/Hr';
 import { Card, type Label } from '@components/Card';
 import { Button } from '@components/Button';
 import { useGetPost } from '@hooks/api/useGetPost';
-import type { PostApi } from '@customType/objectRequest';
 import { formatDate } from '@utils/date';
+import { postModel } from '@stores/post';
 
 const style = {
     stack: {
         width: '100%',
-        height: 'min-content'
+        height: 'min-content',
     },
     box: {
         width: '60px',
         position: 'sticky',
         bottom: '20px',
         marginLeft: 'auto',
-        zIndex:1000,
+        zIndex: 1000,
     },
     iconColor: {
         color: '#353537',
@@ -33,7 +33,8 @@ const style = {
 
 export const Board: ActivityComponentType = () => {
     const [token] = useLocalStorage('token');
-    const [post, setPost] = useState<PostApi[]>();
+    const postModelStore = postModel();
+    const post = postModelStore.getPost();
 
     const { push, replace } = useFlow();
 
@@ -43,9 +44,7 @@ export const Board: ActivityComponentType = () => {
         }
 
         useGetPost().then((response) => {
-            console.info(response.data.data);
-            setPost(response.data.data);
-            // TODO: 가져온 포스트를 전역 스토어에 넣기
+            postModelStore.setPost(response.data.data);
         });
     }, []);
 
@@ -55,7 +54,7 @@ export const Board: ActivityComponentType = () => {
         <AppScreen page>
             <Stack sx={style.stack} gap="60px">
                 <Stack>
-                    <SubTitle marginZero>{formatDate(post?.[0].createdAt as string)}</SubTitle>
+                    <SubTitle marginZero>{formatDate(post?.[0]?.createdAt as string)}</SubTitle>
                     <Hr />
                 </Stack>
                 {post?.map((el) => {
@@ -66,11 +65,11 @@ export const Board: ActivityComponentType = () => {
                             title={el.user.nickName}
                             images={el.picture
                                 ?.split(',')
-                                .filter((el) => el)
-                                .map((el) => {
-                                    const srcSplit = el.split('/');
+                                .filter((imageSrc) => imageSrc)
+                                .map((imageSrc) => {
+                                    const srcSplit = imageSrc.split('/');
                                     return {
-                                        src: el,
+                                        src: imageSrc,
                                         fileName: srcSplit[srcSplit.length - 1],
                                     };
                                 })}
