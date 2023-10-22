@@ -48,7 +48,7 @@ export const Board: ActivityComponentType = () => {
         });
     }, []);
 
-    const gotoWriting = () => push('Writing', {});
+    const gotoWriting = () => push('Writing', { postId: '' });
 
     return (
         <AppScreen page>

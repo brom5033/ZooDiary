@@ -1,6 +1,7 @@
 import { type FC, useState } from 'react';
 import { IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useFlow } from 'stackflow';
 // component
 import { OverlayMenu } from '@components/OverlayMenu';
 import { Button } from '@components/Button';
@@ -15,6 +16,8 @@ interface Props {
 export const Action: FC<Props> = ({ id }) => {
     const [open, setOpen] = useState(false);
 
+    const { push } = useFlow();
+
     const postModelStore = postModel();
 
     const handleDeleteClick = () => {
@@ -26,13 +29,20 @@ export const Action: FC<Props> = ({ id }) => {
         });
     };
 
+    const handleUpdateClick = () => {
+        setOpen(false);
+        push('Writing', { postId: id.toString() });
+    };
+
     return (
         <IconButton aria-label="settings">
             <OverlayMenu action={<MoreVertIcon />} open={open} setOpen={setOpen}>
                 <Button danger onClick={handleDeleteClick}>
                     삭제
                 </Button>
-                <Button outlined>수정</Button>
+                <Button outlined onClick={handleUpdateClick}>
+                    수정
+                </Button>
             </OverlayMenu>
         </IconButton>
     );

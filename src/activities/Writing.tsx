@@ -14,6 +14,7 @@ import { Chip } from '@components/Chip';
 import { ImageModel } from '@stores/image';
 import { useGetPost } from '@hooks/api/useGetPost';
 import { postModel } from '@stores/post';
+import { useUpdatePost } from '@hooks/api/useUpdatePost';
 
 const style = {
     chip: {
@@ -38,7 +39,11 @@ const style = {
     },
 } as const;
 
-export const Writing: ActivityComponentType = () => {
+interface Props {
+    postId: string;
+}
+
+export const Writing: ActivityComponentType<Props> = ({ params }) => {
     const { pop } = useFlow();
     const postModelStore = postModel();
     const [texted, setTexted] = useState<string>();
@@ -48,9 +53,46 @@ export const Writing: ActivityComponentType = () => {
         walking: false,
     });
     const ImageModelStore = ImageModel();
+    const isEditMode = params.postId !== '';
 
     useEffect(() => {
         ImageModelStore.emptyImage();
+        if (isEditMode) {
+            const post = postModelStore.getPost().filter((post) => parseInt(params.postId, 10) === post.id)[0];
+
+            post?.picture
+                ?.split(',')
+                .filter((src) => src)
+                .forEach((src, index) => {
+                    const splitSrc = src.split('/');
+                    const fileName = splitSrc[splitSrc.length - 1];
+
+                    ImageModelStore.setImage(index, src, fileName);
+                });
+
+            setTexted(post.content);
+
+            const splitChips = post?.chips?.split(',');
+            const feelData = splitChips?.filter(
+                (str) => str === '기분좋아' || str === '평범해' || str === '기분나빠',
+            )[0];
+
+            if (splitChips?.includes('산책 다녀왔어')) {
+                setJob({
+                    ...job,
+                    walking: true,
+                });
+            }
+
+            if (splitChips?.includes('간식 먹었어')) {
+                setJob({
+                    ...job,
+                    food: true,
+                });
+            }
+
+            setFeel(feelData);
+        }
     }, []);
 
     const handleFeelClick = (label: string) => () => {
@@ -84,23 +126,33 @@ export const Writing: ActivityComponentType = () => {
         const chips = [feel, job.food ? '간식 먹었어' : null, job.walking ? '산책 다녀왔어' : null]
             .filter((element) => element)
             .join(',');
-        usePostWrite(picture, content, chips).then(() => {
-            useGetPost().then((response) => {
-                postModelStore.setPost(response.data.data);
-                pop();
+
+        if (isEditMode) {
+            useUpdatePost(parseInt(params.postId, 10), content, picture, chips).then(() => {
+                useGetPost().then((response) => {
+                    postModelStore.setPost(response.data.data);
+                    pop();
+                });
             });
-        });
+        } else {
+            usePostWrite(picture, content, chips).then(() => {
+                useGetPost().then((response) => {
+                    postModelStore.setPost(response.data.data);
+                    pop();
+                });
+            });
+        }
     };
 
     return (
         <AppScreen sub>
             <Stack sx={{ width: '100%' }} gap="30px">
-                <SubTitle>글쓰기</SubTitle>
+                <SubTitle>{isEditMode ? '수정하기' : '글쓰기'}</SubTitle>
                 <Stack gap="12px">
                     <Box border>
                         <Stack gap="24px">
                             <Box>
-                                <Carousel upload images={ImageModelStore.getImage()} />
+                                <Carousel upload images={[...(ImageModelStore.getImage() ?? [])]} />
                             </Box>
                             <Stack>
                                 <Box border noGutter sx={style.outer}>
@@ -154,11 +206,19 @@ export const Writing: ActivityComponentType = () => {
                             </Stack>
                         </Stack>
                     </Box>
-                    <Input multiline border type="text" label="일기" onChange={handleTextChange} maxLength={250} />
+                    <Input
+                        multiline
+                        border
+                        type="text"
+                        label="일기"
+                        onChange={handleTextChange}
+                        value={texted}
+                        maxLength={250}
+                    />
                     <div style={{ width: '100%', textAlign: 'right' }}>{texted?.length ?? 0}/250</div>
                 </Stack>
                 <Button border onClick={upLoad}>
-                    작성하기
+                    {isEditMode ? '수정하기' : '작성하기'}
                 </Button>
             </Stack>
         </AppScreen>

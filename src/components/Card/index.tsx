@@ -36,7 +36,7 @@ const style = {
 
 export type Label = '기분좋아' | '평범해' | '기분나빠' | '산책 다녀왔어' | '간식 먹었어';
 
-interface Image {
+export interface Image {
     src: string;
     fileName: string;
 }

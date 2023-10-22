@@ -23,4 +23,7 @@ export interface PostApi extends User {
     picture?: string;
     updateAt: string;
     userId: number;
+    src: string;
+    fileName: string;
+    index: number;
 }
