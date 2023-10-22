@@ -11,7 +11,7 @@ export const OverlayMenu: FC<Props> = ({ children, action, open, setOpen }) => {
     const toggleOpen = () => setOpen?.((prev) => !prev);
     return (
         <>
-            <div onClick={toggleOpen}>{action}</div>
+            <div aria-hidden="true" onClick={toggleOpen}>{action}</div>
             <Drawer anchor="bottom" open={open} onClose={toggleOpen}>
                 <Stack>{children}</Stack>
             </Drawer>

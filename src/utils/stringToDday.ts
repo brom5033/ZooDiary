@@ -10,10 +10,10 @@ const calcTime: CalcFunction = {
 
 const checkTime: CheckFunction = {
     isSecond: (time) => time < 60000,
-    isMinute: (time) => 60000 <= time && time < 3600000,
-    isHour: (time) => 3600000 <= time && time < 86400000,
-    isDay: (time) => 86400000 <= time && time < 2592000000,
-    isOverOneMonth: (time) => 2592000000 <= time,
+    isMinute: (time) => time >= 60000 && time < 3600000,
+    isHour: (time) => time >= 3600000 && time < 86400000,
+    isDay: (time) => time >= 86400000 && time < 2592000000,
+    isOverOneMonth: (time) => time >= 2592000000,
 };
 
 export const stringToDday = (time: string, lang = 'ko') => {
@@ -38,11 +38,9 @@ export const stringToDday = (time: string, lang = 'ko') => {
         // 일 단위
         return formatter.format(-calcTime.day(passed), 'day');
     }
-    if (checkTime.isOverOneMonth(passed)) {
-        // mm월 dd일
-        return new Intl.DateTimeFormat(lang, {
-            month: 'short',
-            day: 'numeric',
-        }).format(new Date(time));
-    }
+    // mm월 dd일
+    return new Intl.DateTimeFormat(lang, {
+        month: 'short',
+        day: 'numeric',
+    }).format(new Date(time));
 };

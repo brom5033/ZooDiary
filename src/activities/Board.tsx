@@ -1,64 +1,30 @@
 import { useEffect } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
-import { userModel } from '@stores/user';
 import { Stack } from '@mui/material';
 import { useFlow } from 'stackflow';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 // component
 import { AppScreen } from '@components/AppScreen';
 import { SubTitle } from '@components/SubTitle';
 import { Hr } from '@components/Hr';
-import { Card } from '@components/Card';
-import EditNoteIcon from '@mui/icons-material/EditNote';
+import { Card, type Label } from '@components/Card';
 import { Button } from '@components/Button';
-
-const response = [
-    {
-        id: 1,
-        picture: 'https://placeholder.com/500x500,https://placeholder.com/500x500,https://placeholder.com/500x500',
-        content: '오늘은 날씨가 좋았다',
-        chip: '기분좋아,간식 먹었어',
-        createdAt: '2023-10-15T21:12:16',
-        user: 'test01',
-        nickName: '몽몽',
-    },
-    {
-        id: 2,
-        picture: 'https://placeholder.com/500x500,https://placeholder.com/500x500,https://placeholder.com/500x500',
-        content: '오늘은 산책을 갔다',
-        chip: '기분좋아,간식 먹었어',
-        createdAt: '2023-10-14T21:12:16',
-        user: 'test01',
-        nickName: '몽몽',
-    },
-];
-
-interface Post {
-    id: number;
-    picture?: string;
-    content: string;
-    chip: string;
-    createdAt: string;
-    user: string;
-    nickName: string;
-}
-// TODO:utils로 옮기기
-const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const month = date.toLocaleString('default', { month: 'long' });
-    const day = date.getDate();
-    return `${month} ${day}일`;
-};
+import { useGetPost } from '@hooks/api/useGetPost';
+import { formatDate } from '@utils/date';
+import { postModel } from '@stores/post';
 
 const style = {
     stack: {
         width: '100%',
+        height: 'min-content',
     },
     box: {
         width: '60px',
-        position: 'absolute',
+        position: 'sticky',
         bottom: '20px',
-        right: '20px',
+        marginLeft: 'auto',
+        zIndex: 1000,
     },
     iconColor: {
         color: '#353537',
@@ -67,6 +33,8 @@ const style = {
 
 export const Board: ActivityComponentType = () => {
     const [token] = useLocalStorage('token');
+    const postModelStore = postModel();
+    const post = postModelStore.getPost();
 
     const { push, replace } = useFlow();
 
@@ -74,22 +42,45 @@ export const Board: ActivityComponentType = () => {
         if (!token()) {
             replace('Login', {});
         }
+
+        useGetPost().then((response) => {
+            postModelStore.setPost(response.data.data);
+        });
     }, []);
 
-    const gotoWriting = () => push('Writing', {});
+    const gotoWriting = () => push('Writing', { postId: '' });
 
-    const lastPost = response[0];
-
-    const id = 'idd';
     return (
         <AppScreen page>
             <Stack sx={style.stack} gap="60px">
                 <Stack>
-                    <SubTitle marginZero>{formatDate(lastPost.createdAt)}</SubTitle>
+                    <SubTitle marginZero>{formatDate(post?.[0]?.createdAt as string)}</SubTitle>
                     <Hr />
                 </Stack>
-                <Card title={id} labels={['기분좋아']} bodyText={id} clickNumber={11} time={lastPost.createdAt} />
-                <Card title={id} labels={['기분좋아']} bodyText={id} clickNumber={11} time={lastPost.createdAt} />
+                {post?.map((el) => {
+                    return (
+                        <Card
+                            key={el.id}
+                            id={el.id}
+                            title={el.user.nickName}
+                            images={el.picture
+                                ?.split(',')
+                                .filter((imageSrc) => imageSrc)
+                                .map((imageSrc) => {
+                                    const srcSplit = imageSrc.split('/');
+                                    return {
+                                        src: imageSrc,
+                                        fileName: srcSplit[srcSplit.length - 1],
+                                    };
+                                })}
+                            labels={el.chips?.split(',').filter((el) => el) as unknown as Label[]}
+                            bodyText={el.content}
+                            heart={el.Heart}
+                            time={el.createdAt}
+                            profileImage={`http://localhost:3000${el.user.picture}`}
+                        />
+                    );
+                })}
                 <div style={style.box}>
                     <Button border onClick={gotoWriting}>
                         <EditNoteIcon sx={style.iconColor} />

@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode, MouseEventHandler } from 'react';
 import { Chip as MUIChip } from '@mui/material';
 
 const colorPalette = {
@@ -14,15 +14,25 @@ type ColorPalette = keyof typeof colorPalette;
 interface Props {
     label: ReactNode;
     color: ColorPalette;
+    onClick?: MouseEventHandler<HTMLDivElement>;
+    active?: boolean;
+    margin?: boolean;
 }
 
-export const Chip: FC<Props> = ({ label, color }) => {
+export const Chip: FC<Props> = ({ label, color, onClick, active, margin }) => {
     const style = {
         chip: {
             color: 'white',
-            backgroundColor: colorPalette[color],
+            backgroundColor: active ? colorPalette[color] : 'gray',
+            '&:hover, &:focus': {
+                backgroundColor: colorPalette[color],
+            },
+            '&:active': {
+                backgroundColor: colorPalette[color],
+            },
+            margin: margin ? '5px' : 0
         },
     } as const;
 
-    return <MUIChip label={label} sx={style.chip} size="small" />;
+    return <MUIChip label={label} sx={style.chip} size="small" onClick={onClick} />;
 };

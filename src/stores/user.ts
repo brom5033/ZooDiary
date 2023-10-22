@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 interface User {
     user?: string;
@@ -12,28 +13,36 @@ interface UserModel {
     emptyUser: () => void;
 }
 
-export const userModel = create<UserModel>((set, get) => ({
-    data: {
-        user: undefined,
-        nickName: undefined,
-    },
-
-    getUser() {
-        return get().data;
-    },
-
-    setUser(user, nickName) {
-        if (get().data.user === user && get().data.nickName === nickName) {
-            return;
-        }
-
-        set({
+export const userModel = create<UserModel>()(
+    persist(
+        (set, get) => ({
             data: {
-                user,
-                nickName,
+                user: undefined,
+                nickName: undefined,
             },
-        });
-    },
 
-    emptyUser: () => set({ data: { user: undefined, nickName: undefined } }),
-}));
+            getUser() {
+                return get().data;
+            },
+
+            setUser(user, nickName) {
+                if (get().data.user === user && get().data.nickName === nickName) {
+                    return;
+                }
+
+                set({
+                    data: {
+                        user,
+                        nickName,
+                    },
+                });
+            },
+
+            emptyUser: () => set({ data: { user: undefined, nickName: undefined } }),
+        }),
+        {
+            name: 'store',
+            storage: createJSONStorage(() => sessionStorage),
+        },
+    ),
+);

@@ -8,9 +8,9 @@ import { FileUpload } from '@components/FileUpload';
 import { AddPhotoAlternate } from '@mui/icons-material';
 import styled from '@emotion/styled';
 // props
-import { Props as CardProps } from '.';
 import { ImageModel } from '@stores/image';
 import { useFileUpload } from '@hooks/api/useFileUpload';
+import { Props as CardProps } from '.';
 
 const style = {
     pagination: {
@@ -29,6 +29,7 @@ const style = {
         marginBottom: '60px',
         textAlign: 'center',
     },
+    imageWrap: { alignSelf: 'center', width: '100%' },
 } as const;
 
 interface Props {
@@ -61,8 +62,7 @@ export const Carousel: FC<Props> = ({ images, upload }) => {
             };
 
             useFileUpload(file).then((response) => {
-                console.log(response);
-                imageModelStore.setImage(index, '', carouselImages[index].fileName);
+                imageModelStore.setImage(index, response.data.data, carouselImages[index].fileName);
             });
 
             setCarouselImages([...carouselImages]);
@@ -91,12 +91,24 @@ export const Carousel: FC<Props> = ({ images, upload }) => {
                     ) : upload && src !== '' ? (
                         <MUIBox sx={style.imageBox}>
                             <FileUpload onChange={handleChange}>
-                                <CardMedia component="img" src={src} alt={fileName} width="100%" />
+                                <CardMedia
+                                    component="img"
+                                    src={`http://localhost:3000${src}`}
+                                    alt={fileName}
+                                    width="100%"
+                                />
                             </FileUpload>
                         </MUIBox>
                     ) : (
                         <MUIBox sx={style.imageBox}>
-                            <CardMedia component="img" src={src} alt={fileName} width="100%" />
+                            <div style={style.imageWrap}>
+                                <CardMedia
+                                    component="img"
+                                    src={`http://localhost:3000${src}`}
+                                    alt={fileName}
+                                    width="100%"
+                                />
+                            </div>
                         </MUIBox>
                     )}
                 </Slider>
