@@ -14,7 +14,11 @@ export const AppBar: FC = () => {
         header: {
             color: '#353537',
             padding: '10px 12px',
-            height: '30px',
+            height: '50px',
+            position: 'sticky',
+            zIndex: 1000,
+            top: 0,
+            backgroundColor: 'white',
         },
         button: {
             position: 'absolute',

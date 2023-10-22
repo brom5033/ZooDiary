@@ -9,7 +9,8 @@ import { Container } from '@mui/material';
 const style = {
     spacing: {
         paddingTop: '24px',
-        height: 'calc(100vh - 30px)',
+        paddingBottom: '24px',
+        minHeight: 'calc(100vh - 50px)',
         display: 'flex',
     },
 } as const;

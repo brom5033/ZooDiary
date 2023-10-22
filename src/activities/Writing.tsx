@@ -150,7 +150,9 @@ export const Writing: ActivityComponentType = () => {
                     <Input multiline border type="text" label="일기" onChange={handleTextChange} maxLength={250} />
                     <div style={{ width: '100%', textAlign: 'right' }}>{texted?.length ?? 0}/250</div>
                 </Stack>
-                <Button border onClick={upLoad}>작성하기</Button>
+                <Button border onClick={upLoad}>
+                    작성하기
+                </Button>
             </Stack>
         </AppScreen>
     );

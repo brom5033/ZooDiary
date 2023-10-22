@@ -30,7 +30,7 @@ const style = {
     },
 } as const;
 
-type Label = '기분좋아' | '평범해' | '기분나빠' | '산책 다녀왔어' | '간식 먹었어';
+export type Label = '기분좋아' | '평범해' | '기분나빠' | '산책 다녀왔어' | '간식 먹었어';
 
 interface Image {
     src: string;
@@ -54,7 +54,7 @@ export const Card: FC<Props> = ({ title, labels, bodyText, clickNumber, images, 
         <MUICard>
             <CardHeader avatar={<ProfileIcon />} title={<Title time={time} title={title} />} action={<Action />} />
             <Carousel images={images} />
-            <Label labels={labels} />
+            {labels.length > 0 && <Label labels={labels} />}
             <CardContent>
                 <Typography sx={style.font}>{bodyText}</Typography>
             </CardContent>

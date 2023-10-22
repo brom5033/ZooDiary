@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 // Props
-import { Props } from '.';
+import type { Props } from '.';
 // component
 import { Chip } from '@components/Chip';
 
@@ -17,5 +17,5 @@ interface LabelProps {
 }
 
 export const Label: FC<LabelProps> = ({ labels }) => {
-    return labels?.map((label) => <Chip key={label} label={label} color={labelColor[label]} />);
+    return labels?.map((label) => <Chip key={label} label={label} color={labelColor[label]} active />);
 };
