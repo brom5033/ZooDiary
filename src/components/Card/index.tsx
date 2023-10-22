@@ -1,20 +1,25 @@
-import { type FC, useState } from 'react';
+import { type FC, useState, useEffect } from 'react';
 import { Card as MUICard, CardHeader, CardContent, CardActions, Typography, Icon } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import type { PostApi } from '@customType/objectRequest';
+import { userModel } from '@stores/user';
+
+import { useHeart } from '@hooks/api/useHeart';
+import { numberToString } from '@utils/numberToString';
+
 // component
 import { ProfileIcon } from '../ProfileIcon';
 import { Title } from './Title';
 import { Carousel } from './Carousel';
 import { Action } from './Action';
 import { Label } from './Label';
-// utils
-import { numberToString } from '@utils/numberToString';
+
 
 const style = {
     font: {
         fontSize: '12px',
-        wordWrap:'break-word'
+        wordWrap: 'break-word',
     },
     image: {
         width: '338px',
@@ -39,30 +44,47 @@ interface Image {
 }
 
 export interface Props {
+    id: number;
     title: string;
     labels: Label[];
     bodyText: string;
-    clickNumber: number;
+    heart: PostApi['Heart'];
     images?: Image[];
     time: string;
     profileImage?: string;
 }
 
-export const Card: FC<Props> = ({ title, labels, bodyText, clickNumber, images, time, profileImage }) => {
+export const Card: FC<Props> = ({ id, title, labels, bodyText, heart, images, time, profileImage }) => {
+    const userModelStore = userModel();
     const [isHeartClick, setHeartClick] = useState(false);
-    const heartToggle = () => setHeartClick(!isHeartClick);
+
+    useEffect(() => {
+        const myNickName = userModelStore.getUser().nickName;
+        const isClick = heart.filter((heart) => heart.user.nickName === myNickName)[0];
+        setHeartClick(!!isClick);
+    }, [heart]);
+
+    const handleHeartClick = () => {
+        useHeart(id).then(()=>{
+            setHeartClick(!isHeartClick)
+        })
+    };
 
     return (
         <MUICard>
-            <CardHeader avatar={<ProfileIcon src={profileImage} alt={title}/>} title={<Title time={time} title={title} />} action={<Action />} />
+            <CardHeader
+                avatar={<ProfileIcon src={profileImage} alt={title} />}
+                title={<Title time={time} title={title} />}
+                action={<Action />}
+            />
             <Carousel images={images} />
             {labels.length > 0 && <Label labels={labels} />}
             <CardContent>
                 <Typography sx={style.font}>{bodyText}</Typography>
             </CardContent>
             <CardActions sx={style.iconBox}>
-                <Typography sx={style.iconMargin}>{numberToString(clickNumber)}</Typography>
-                <Icon aria-label="add to favorites" onClick={heartToggle}>
+                <Typography sx={style.iconMargin}>{numberToString(heart.length)}</Typography>
+                <Icon aria-label="add to favorites" onClick={handleHeartClick}>
                     {isHeartClick ? <FavoriteIcon sx={style.icon} /> : <FavoriteBorderIcon sx={style.icon} />}
                 </Icon>
             </CardActions>

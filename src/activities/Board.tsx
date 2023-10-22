@@ -45,6 +45,7 @@ export const Board: ActivityComponentType = () => {
         useGetPost().then((response) => {
             console.info(response.data.data);
             setPost(response.data.data);
+            // TODO: 가져온 포스트를 전역 스토어에 넣기
         });
     }, []);
 
@@ -61,6 +62,7 @@ export const Board: ActivityComponentType = () => {
                     return (
                         <Card
                             key={el.id}
+                            id={el.id}
                             title={el.user.nickName}
                             images={el.picture
                                 ?.split(',')
@@ -74,7 +76,7 @@ export const Board: ActivityComponentType = () => {
                                 })}
                             labels={el.chips?.split(',').filter((el) => el) as unknown as Label[]}
                             bodyText={el.content}
-                            clickNumber={11}
+                            heart={el.Heart}
                             time={el.createdAt}
                             profileImage={`http://localhost:3000${el.user.picture}`}
                         />
