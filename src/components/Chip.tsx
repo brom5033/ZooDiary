@@ -16,9 +16,10 @@ interface Props {
     color: ColorPalette;
     onClick?: MouseEventHandler<HTMLDivElement>;
     active?: boolean;
+    margin?: boolean;
 }
 
-export const Chip: FC<Props> = ({ label, color, onClick, active }) => {
+export const Chip: FC<Props> = ({ label, color, onClick, active, margin }) => {
     const style = {
         chip: {
             color: 'white',
@@ -29,6 +30,7 @@ export const Chip: FC<Props> = ({ label, color, onClick, active }) => {
             '&:active': {
                 backgroundColor: colorPalette[color],
             },
+            margin: margin ? '5px' : 0
         },
     } as const;
 

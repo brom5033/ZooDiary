@@ -17,5 +17,5 @@ interface LabelProps {
 }
 
 export const Label: FC<LabelProps> = ({ labels }) => {
-    return labels?.map((label) => <Chip key={label} label={label} color={labelColor[label]} active />);
+    return labels?.map((label) => <Chip key={label} label={label} color={labelColor[label]} active margin/>);
 };

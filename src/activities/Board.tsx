@@ -76,6 +76,7 @@ export const Board: ActivityComponentType = () => {
                             bodyText={el.content}
                             clickNumber={11}
                             time={el.createdAt}
+                            profileImage={`http://localhost:3000${el.user.picture}`}
                         />
                     );
                 })}

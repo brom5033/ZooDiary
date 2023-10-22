@@ -14,6 +14,7 @@ import { numberToString } from '@utils/numberToString';
 const style = {
     font: {
         fontSize: '12px',
+        wordWrap:'break-word'
     },
     image: {
         width: '338px',
@@ -44,15 +45,16 @@ export interface Props {
     clickNumber: number;
     images?: Image[];
     time: string;
+    profileImage?: string;
 }
 
-export const Card: FC<Props> = ({ title, labels, bodyText, clickNumber, images, time }) => {
+export const Card: FC<Props> = ({ title, labels, bodyText, clickNumber, images, time, profileImage }) => {
     const [isHeartClick, setHeartClick] = useState(false);
     const heartToggle = () => setHeartClick(!isHeartClick);
 
     return (
         <MUICard>
-            <CardHeader avatar={<ProfileIcon />} title={<Title time={time} title={title} />} action={<Action />} />
+            <CardHeader avatar={<ProfileIcon src={profileImage} alt={title}/>} title={<Title time={time} title={title} />} action={<Action />} />
             <Carousel images={images} />
             {labels.length > 0 && <Label labels={labels} />}
             <CardContent>

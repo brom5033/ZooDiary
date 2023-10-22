@@ -29,6 +29,7 @@ const style = {
         marginBottom: '60px',
         textAlign: 'center',
     },
+    imageWrap: { alignSelf: 'center', width: '100%' },
 } as const;
 
 interface Props {
@@ -90,12 +91,24 @@ export const Carousel: FC<Props> = ({ images, upload }) => {
                     ) : upload && src !== '' ? (
                         <MUIBox sx={style.imageBox}>
                             <FileUpload onChange={handleChange}>
-                                <CardMedia component="img" src={`http://localhost:3000${src}`} alt={fileName} width="100%" />
+                                <CardMedia
+                                    component="img"
+                                    src={`http://localhost:3000${src}`}
+                                    alt={fileName}
+                                    width="100%"
+                                />
                             </FileUpload>
                         </MUIBox>
                     ) : (
                         <MUIBox sx={style.imageBox}>
-                            <CardMedia component="img" src={`http://localhost:3000${src}`} alt={fileName} width="100%" />
+                            <div style={style.imageWrap}>
+                                <CardMedia
+                                    component="img"
+                                    src={`http://localhost:3000${src}`}
+                                    alt={fileName}
+                                    width="100%"
+                                />
+                            </div>
                         </MUIBox>
                     )}
                 </Slider>
