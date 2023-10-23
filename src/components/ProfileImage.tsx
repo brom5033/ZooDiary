@@ -29,7 +29,7 @@ export const ProfileImage: FC = () => {
                     <img src={src} alt="프로필 이미지" width="100%" />
                 </FileUpload>
             ) : (
-                <FileUpload onChange={handleChange}>
+                <FileUpload onChange={handleChange} >
                     <AddPhotoAlternate />
                 </FileUpload>
             )}
