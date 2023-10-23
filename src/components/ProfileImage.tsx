@@ -3,6 +3,8 @@ import { AddPhotoAlternate } from '@mui/icons-material';
 // component
 import { FileUpload } from '@components/FileUpload';
 import { Box } from '@components/Box';
+import { usePutProfile } from '@hooks/api/usePutProfile';
+import { useFileUpload } from '@hooks/api/useFileUpload';
 
 export const ProfileImage: FC = () => {
     const [src, setSrc] = useState<string>();
@@ -10,10 +12,14 @@ export const ProfileImage: FC = () => {
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0] as File;
         const reader = new FileReader();
+
         reader.onload = ({ target }) => {
             setSrc(target?.result as string);
+            useFileUpload(file).then((response) => {
+                usePutProfile(response.data.data);
+            });
         };
-        reader.readAsDataURL(file as File);
+        reader.readAsDataURL(file);
     };
 
     return (
