@@ -16,6 +16,9 @@ yarn dev
 // production
 yarn start
 ```
+zoodiary-back(https://github.com/devxian96/ZooDiary-Back)
+위 프로젝트는 백엔드 프로젝트로, zoodiary 레포와 함께 실행해야합니다.
+
 
 ## Project structure
 ```
