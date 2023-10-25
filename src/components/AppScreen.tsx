@@ -1,10 +1,12 @@
 import type { FC, PropsWithChildren } from 'react';
+import { AppScreen as StackFlowAppScreen } from '@stackflow/plugin-basic-ui';
+import { Container } from '@mui/material';
+// component
 import { AppBar } from '@components/bar/AppBar';
 import { MenuBar } from '@components/bar/MenuBar';
 import { MyPageBar } from '@components/bar/MyPageBar';
 import { ButtonBar } from '@components/bar/ButtonBar';
-import { AppScreen as StackFlowAppScreen } from '@stackflow/plugin-basic-ui';
-import { Container } from '@mui/material';
+
 
 const style = {
     spacing: {
