@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef} from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { Stack } from '@mui/material';
@@ -17,6 +17,7 @@ import { postModel } from '@stores/post';
 const style = {
     stack: {
         width: '100%',
+        maxWidth: '1000px',
         height: 'min-content',
     },
     box: {
@@ -35,6 +36,10 @@ export const Board: ActivityComponentType = () => {
     const [token] = useLocalStorage('token');
     const postModelStore = postModel();
     const post = postModelStore.getPost();
+    // observer
+    const loadMoreRef = useRef<HTMLDivElement>(null);
+    const [isPageEnd, setIsPageEnd] = useState<boolean>(false);
+    const page = useRef(1);
 
     const { push, replace } = useFlow();
 
@@ -50,6 +55,38 @@ export const Board: ActivityComponentType = () => {
 
     const gotoWriting = () => push('Writing', { postId: '' });
 
+    const handleObserver = async ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+        if (entry.isIntersecting) {
+            observer.unobserve(entry.target);
+            await useGetPost(page.current * 10, page.current * 20).then((response) => {
+                if (response.data.data.length === 0) {
+                    setIsPageEnd(true);
+                } 
+
+                postModelStore.setPost(postModelStore.getPost().concat(response.data.data));
+                page.current += 1;
+            });
+            observer.observe(entry.target);
+        }
+    };
+
+    useEffect(() => {
+        if (!loadMoreRef.current) return;
+
+        const option = {
+            root: null,
+            rootMagin: '0px',
+            threshold: 0.5,
+        };
+        const observer = new IntersectionObserver(handleObserver, option);
+
+        // eslint-disable-next-line no-unused-expressions
+        loadMoreRef.current && observer.observe(loadMoreRef.current);
+
+        // eslint-disable-next-line consistent-return
+        return () => observer && observer.disconnect();
+    }, [handleObserver, isPageEnd]);
+
     return (
         <AppScreen page>
             <Stack sx={style.stack} gap="60px">
@@ -57,10 +94,10 @@ export const Board: ActivityComponentType = () => {
                     <SubTitle marginZero>{formatDate(post?.[0]?.createdAt as string)}</SubTitle>
                     <Hr />
                 </Stack>
-                {post?.map((el) => {
+                {postModelStore.getPost()?.map((el) => {
                     return (
                         <Card
-                            key={el.id}
+                            key={`card-${el.id}`}
                             id={el.id}
                             title={el.user.nickName}
                             images={el.picture
@@ -81,6 +118,7 @@ export const Board: ActivityComponentType = () => {
                         />
                     );
                 })}
+                <div>{!isPageEnd && <div ref={loadMoreRef} />}</div>
                 <div style={style.box}>
                     <Button border onClick={gotoWriting}>
                         <EditNoteIcon sx={style.iconColor} />

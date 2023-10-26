@@ -13,7 +13,6 @@ import { userModel } from '@stores/user';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { useLogin } from '@hooks/api/useLogin';
 import { useSignUp } from '@hooks/api/useSignUp';
-// constants
 import { agreement } from '@constants/agreement';
 
 type CheckType = null | 1 | 2 | 3 | 4 | 5 | 6;
