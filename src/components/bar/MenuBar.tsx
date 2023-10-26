@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Container } from '@mui/material';
-
+// component
 import { Logo } from '@components/Logo';
 
 const style = {
