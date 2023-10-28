@@ -4,7 +4,7 @@
 
 ## Requirement
 ```
-typescript, react, vite, ESLint, prettier, commitLint, husky, projectStructure, stackflow, mui, swagger, zustand, emotion
+typescript, react, vite, ESLint, prettier, commitLint, husky, projectStructure, stackflow, mui, swagger, zustand, emotion, pwa
 
 ```
 
