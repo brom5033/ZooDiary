@@ -50,6 +50,6 @@ build       빌드 시스템 또는 외부 디펜던시에 영향을 미치는 �
 temp        변경사항에 포함되지 않는 임시 커밋입니다.
 ```
 
-이 프로젝트는 [notion](https://www.notion.so/Zoo-Diary-8ae3a505ff5c47dabbd326e271dc2e29?pvs=4)으로 관리했어요.
+이 프로젝트는 [notion](https://gaudy-baryonyx-7e4.notion.site/Zoo-Diary-8ae3a505ff5c47dabbd326e271dc2e29?pvs=4)으로 관리했어요.
 
 디자인은 간단하게 [figma](https://www.figma.com/file/R3RnoAUBlLY1ASy45ME2C8/Zoo-Diary?type=design&t=llIylrRRAeyoubU2-6) 로 제작했어요.
