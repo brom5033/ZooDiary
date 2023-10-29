@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef} from 'react';
+import { useEffect, useState, useRef } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { Stack } from '@mui/material';
@@ -38,8 +38,8 @@ export const Board: ActivityComponentType = () => {
     const post = postModelStore.getPost();
     // observer
     const loadMoreRef = useRef<HTMLDivElement>(null);
-    const [isPageEnd, setIsPageEnd] = useState<boolean>(false);
-    const page = useRef(1);
+    const [isPageEnd, setIsPageEnd] = useState<boolean>(true);
+    const [page, setPage] = useState(1);
 
     const { push, replace } = useFlow();
 
@@ -50,6 +50,7 @@ export const Board: ActivityComponentType = () => {
 
         useGetPost().then((response) => {
             postModelStore.setPost(response.data.data);
+            setIsPageEnd(false);
         });
     }, []);
 
@@ -58,13 +59,22 @@ export const Board: ActivityComponentType = () => {
     const handleObserver = async ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
         if (entry.isIntersecting) {
             observer.unobserve(entry.target);
-            await useGetPost(page.current * 10, page.current * 20).then((response) => {
+
+            setIsPageEnd(true);
+
+            await useGetPost(page * 10, page * 10 + 10).then((response) => {
                 if (response.data.data.length === 0) {
                     setIsPageEnd(true);
-                } 
+                    return;
+                }
+                const responseArray = response.data.data.slice(0, 9);
 
-                postModelStore.setPost(postModelStore.getPost().concat(response.data.data));
-                page.current += 1;
+                postModelStore.setPost(postModelStore.getPost().concat(responseArray));
+                setPage(page + 1);
+
+                if (response.data.data.length !== 0) {
+                    setIsPageEnd(false);
+                }
             });
             observer.observe(entry.target);
         }
