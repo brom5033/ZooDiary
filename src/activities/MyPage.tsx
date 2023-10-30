@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { Stack } from '@mui/material';
@@ -43,6 +43,11 @@ export const MyPage: ActivityComponentType = () => {
     const myPostModelStore = myPostModel();
     const post = myPostModelStore.getPost();
 
+    // observer
+    const loadMoreRef = useRef<HTMLDivElement>(null);
+    const [isPageEnd, setIsPageEnd] = useState<boolean>(true);
+    const [page, setPage] = useState(1);
+
     const { push, replace } = useFlow();
 
     useEffect(() => {
@@ -52,8 +57,50 @@ export const MyPage: ActivityComponentType = () => {
 
         useGetMyPost().then((response) => {
             myPostModelStore.setPost(response.data.data);
+            setIsPageEnd(false);
         });
     }, []);
+
+    const handleObserver = async ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+        if (entry.isIntersecting) {
+            observer.unobserve(entry.target);
+
+            setIsPageEnd(true);
+
+            await useGetMyPost(page * 10, page * 10 + 10).then((response) => {
+                if (response.data.data.length === 0) {
+                    setIsPageEnd(true);
+                    return;
+                }
+                const responseArray = response.data.data.slice(0, 9);
+
+                myPostModelStore.setPost(myPostModelStore.getPost().concat(responseArray));
+                setPage(page + 1);
+
+                if (response.data.data.length !== 0) {
+                    setIsPageEnd(false);
+                }
+            });
+            observer.observe(entry.target);
+        }
+    };
+
+    useEffect(() => {
+        if (!loadMoreRef.current) return;
+
+        const option = {
+            root: null,
+            rootMagin: '0px',
+            threshold: 0.5,
+        };
+        const observer = new IntersectionObserver(handleObserver, option);
+
+        // eslint-disable-next-line no-unused-expressions
+        loadMoreRef.current && observer.observe(loadMoreRef.current);
+
+        // eslint-disable-next-line consistent-return
+        return () => observer && observer.disconnect();
+    }, [handleObserver, isPageEnd]);
 
     const gotoWriting = () => push('Writing', { postId: '' });
 
@@ -94,6 +141,7 @@ export const MyPage: ActivityComponentType = () => {
                         />
                     );
                 })}
+                <div>{!isPageEnd && <div ref={loadMoreRef} />}</div>
                 <div style={style.box}>
                     <Button border onClick={gotoWriting}>
                         <EditNoteIcon sx={style.iconColor} />
