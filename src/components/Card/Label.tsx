@@ -1,8 +1,8 @@
 import type { FC } from 'react';
-// Props
-import type { Props } from '.';
 // component
 import { Chip } from '@components/Chip';
+// Props
+import type { Props } from '.';
 
 const labelColor = {
     기분좋아: 'hotpink',

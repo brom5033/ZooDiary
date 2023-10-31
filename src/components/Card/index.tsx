@@ -6,7 +6,6 @@ import type { PostApi } from '@customType/objectRequest';
 import { userModel } from '@stores/user';
 import { useHeart } from '@hooks/api/useHeart';
 import { numberToString } from '@utils/numberToString';
-
 // component
 import { ProfileIcon } from '../ProfileIcon';
 import { Title } from './Title';
@@ -50,9 +49,10 @@ export interface Props {
     images?: Image[];
     time: string;
     profileImage?: string;
+    demo?: boolean
 }
 
-export const Card: FC<Props> = ({ id, title, labels, bodyText, heart, images, time, profileImage }) => {
+export const Card: FC<Props> = ({ id, title, labels, bodyText, heart, images, time, profileImage, demo }) => {
     const userModelStore = userModel();
     const [isHeartClick, setHeartClick] = useState(false);
     const [plusHeart, setPlusHeart] = useState(0);
@@ -89,7 +89,7 @@ export const Card: FC<Props> = ({ id, title, labels, bodyText, heart, images, ti
                 title={<Title time={time} title={title} />}
                 action={<Action id={id} />}
             />
-            <Carousel images={images} />
+            <Carousel demo={demo} images={images} />
             {labels.length > 0 && <Label labels={labels} />}
             <CardContent>
                 <Typography sx={style.font}>{bodyText}</Typography>
