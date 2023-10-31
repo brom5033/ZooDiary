@@ -29,7 +29,7 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                 <Grid item sx={{ display: { xs: 'none', md: 'block' } }} md={8}>
                     test
                 </Grid>
-                <Grid item sm={12} md={4}>
+                <Grid item sm={12} md={4} sx={{width:'100%'}}>
                     {main && <MenuBar />}
                     {sub && <AppBar />}
                     {page && <MyPageBar />}
