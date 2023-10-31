@@ -35,9 +35,10 @@ const style = {
 interface Props {
     images?: CardProps['images'];
     upload?: boolean;
+    demo?: boolean;
 }
 
-export const Carousel: FC<Props> = ({ images, upload }) => {
+export const Carousel: FC<Props> = ({ images, upload, demo }) => {
     const [carouselImages, setCarouselImages] = useState(images);
     const [carouselPage, setCarouselPage] = useState<SwiperCore>();
     const imageModelStore = ImageModel();
@@ -93,7 +94,7 @@ export const Carousel: FC<Props> = ({ images, upload }) => {
                             <FileUpload onChange={handleChange}>
                                 <CardMedia
                                     component="img"
-                                    src={`http://localhost:3000${src}`}
+                                    src={`${demo ? '' : 'http://localhost:3000'}${src}`}
                                     alt={fileName}
                                     width="100%"
                                 />
@@ -104,7 +105,7 @@ export const Carousel: FC<Props> = ({ images, upload }) => {
                             <div style={style.imageWrap}>
                                 <CardMedia
                                     component="img"
-                                    src={`http://localhost:3000${src}`}
+                                    src={`${demo ? '' : 'http://localhost:3000'}${src}`}
                                     alt={fileName}
                                     width="100%"
                                 />

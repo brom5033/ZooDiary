@@ -16,6 +16,7 @@ export const Box: FC<Props> = ({ children, multiline, border, sx, noGutter }) =>
             borderRadius: border ? '5px' : '35px',
             border: '1px solid #CACCBE',
             overflowY: 'auto',
+            backgroundColor: 'white',
             ...sx,
         },
         textBox: {
