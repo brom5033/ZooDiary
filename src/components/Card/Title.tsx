@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { Typography } from '@mui/material';
 // props
-import { Props } from '.';
-// utils
 import { stringToDday } from '@utils/stringToDday';
+import { Props } from '.';
+
 
 interface TitleProps {
     time: Props['time'];

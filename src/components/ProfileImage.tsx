@@ -1,10 +1,8 @@
 import { type FC, type ChangeEvent, useState } from 'react';
 import { AddPhotoAlternate } from '@mui/icons-material';
 // component
-import { FileUpload } from '@components/FileUpload';
-import { Box } from '@components/Box';
-import { usePutProfile } from '@hooks/api/usePutProfile';
-import { useFileUpload } from '@hooks/api/useFileUpload';
+import { FileUpload,Box } from '@components/index';
+import { usePutProfile, useFileUpload} from '@hooks/index';
 
 export const ProfileImage: FC = () => {
     const [src, setSrc] = useState<string>();

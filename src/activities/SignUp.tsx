@@ -3,16 +3,9 @@ import type { ActivityComponentType } from '@stackflow/react';
 import Stack from '@mui/material/Stack';
 import { useFlow } from 'stackflow';
 // component
-import { AppScreen } from '@components/AppScreen';
-import { SubTitle } from '@components/SubTitle';
-import { Box } from '@components/Box';
-import { CheckBox } from '@components/CheckBox';
-import { Input } from '@components/Input';
-import { Button } from '@components/Button';
+import { AppScreen, SubTitle, Box, CheckBox, Input, Button } from '@components/index';
+import { useLocalStorage, useLogin, useSignUp } from '@hooks/index';
 import { userModel } from '@stores/user';
-import { useLocalStorage } from '@hooks/useLocalStorage';
-import { useLogin } from '@hooks/api/useLogin';
-import { useSignUp } from '@hooks/api/useSignUp';
 import { agreement } from '@constants/agreement';
 
 type CheckType = null | 1 | 2 | 3 | 4 | 5 | 6;

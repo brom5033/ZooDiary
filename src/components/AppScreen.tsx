@@ -2,11 +2,7 @@ import type { FC, PropsWithChildren } from 'react';
 import { AppScreen as StackFlowAppScreen } from '@stackflow/plugin-basic-ui';
 import { Container, Grid, Typography, Stack, Link } from '@mui/material';
 // component
-import { AppBar } from '@components/bar/AppBar';
-import { MenuBar } from '@components/bar/MenuBar';
-import { MyPageBar } from '@components/bar/MyPageBar';
-import { ButtonBar } from '@components/bar/ButtonBar';
-import { Box } from './Box';
+import { AppBar, MenuBar, MyPageBar, ButtonBar, Box } from '@components/index';
 import { Card } from './Card';
 
 const style = {

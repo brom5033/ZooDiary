@@ -5,11 +5,8 @@ import { Stack } from '@mui/material';
 import { useFlow } from 'stackflow';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 // component
-import { AppScreen } from '@components/AppScreen';
-import { SubTitle } from '@components/SubTitle';
-import { Hr } from '@components/Hr';
+import { AppScreen, SubTitle, Hr, Button } from '@components/index';
 import { Card, type Label } from '@components/Card';
-import { Button } from '@components/Button';
 import { useGetPost } from '@hooks/api/useGetPost';
 import { formatDate } from '@utils/date';
 import { postModel } from '@stores/post';

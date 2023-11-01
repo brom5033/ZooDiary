@@ -3,8 +3,7 @@ import { useFlow } from 'stackflow';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Container, Icon } from '@mui/material';
 // component
-import { Logo } from '@components/Logo';
-import { Logout } from '@components/Logout';
+import { Logo,Logout } from '@components/index';
 
 export const ButtonBar: FC = () => {
     const { pop } = useFlow();
