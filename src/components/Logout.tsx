@@ -3,8 +3,7 @@ import { IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useFlow } from 'stackflow';
 // component
-import { OverlayMenu } from '@components/OverlayMenu';
-import { Button } from '@components/Button';
+import { OverlayMenu,Button } from '@components/index';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { userModel } from '@stores/user';
 

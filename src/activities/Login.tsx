@@ -3,14 +3,9 @@ import type { ActivityComponentType } from '@stackflow/react';
 import { Stack } from '@mui/material';
 import { useFlow } from 'stackflow';
 // component
-import { AppScreen } from '@components/AppScreen';
-import { Box } from '@components/Box';
-import { SubTitle } from '@components/SubTitle';
-import { Input } from '@components/Input';
-import { Button } from '@components/Button';
-import { useLogin } from '@hooks/api/useLogin';
+import { AppScreen, Box, SubTitle, Input, Button } from '@components/index';
+import { useLogin, useLocalStorage } from '@hooks/index';
 import { userModel } from '@stores/user';
-import { useLocalStorage } from '@hooks/useLocalStorage';
 
 export const Login: ActivityComponentType = () => {
     const { push, replace } = useFlow();

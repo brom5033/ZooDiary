@@ -3,18 +3,10 @@ import type { ActivityComponentType } from '@stackflow/react';
 import { Stack, Grid } from '@mui/material';
 import { useFlow } from 'stackflow';
 // component
-import { Box } from '@components/Box';
-import { AppScreen } from '@components/AppScreen';
-import { SubTitle } from '@components/SubTitle';
+import { Box, AppScreen, SubTitle, Input, Button, Chip } from '@components/index';
 import { Carousel } from '@components/Card/Carousel';
-import { Input } from '@components/Input';
-import { Button } from '@components/Button';
-import { usePostWrite } from '@hooks/api/usePostWrite';
-import { Chip } from '@components/Chip';
-import { ImageModel } from '@stores/image';
-import { useGetPost } from '@hooks/api/useGetPost';
-import { postModel } from '@stores/post';
-import { useUpdatePost } from '@hooks/api/useUpdatePost';
+import { usePostWrite, useGetPost, useUpdatePost } from '@hooks/index';
+import { ImageModel, postModel } from '@stores/index';
 
 const style = {
     chip: {

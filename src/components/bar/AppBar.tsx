@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useFlow } from 'stackflow';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Container, Icon } from '@mui/material';
-
+// component
 import { Logo } from '@components/Logo';
 
 export const AppBar: FC = () => {

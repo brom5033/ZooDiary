@@ -5,14 +5,10 @@ import { Stack } from '@mui/material';
 import { useFlow } from 'stackflow';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 // component
-import { AppScreen } from '@components/AppScreen';
-import { SubTitle } from '@components/SubTitle';
-import { Hr } from '@components/Hr';
+import { AppScreen, SubTitle, Hr, Button, ProfileImage } from '@components/index';
 import { Card, type Label } from '@components/Card';
-import { Button } from '@components/Button';
 import { useGetMyPost } from '@hooks/api/useGetMyPost';
 import { formatDate } from '@utils/date';
-import { ProfileImage } from '@components/ProfileImage';
 import { myPostModel } from '@stores/myPost';
 
 const style = {
