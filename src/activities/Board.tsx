@@ -76,8 +76,6 @@ export const Board: ActivityComponentType = () => {
     };
 
     useEffect(() => {
-        if (!loadMoreRef.current) return;
-
         const option = {
             root: null,
             rootMagin: '0px',
@@ -85,11 +83,11 @@ export const Board: ActivityComponentType = () => {
         };
         const observer = new IntersectionObserver(handleObserver, option);
 
-        // eslint-disable-next-line no-unused-expressions
-        loadMoreRef.current && observer.observe(loadMoreRef.current);
-
-        // eslint-disable-next-line consistent-return
-        return () => observer && observer.disconnect();
+        if (loadMoreRef?.current) {
+            observer.observe(loadMoreRef.current);
+        }
+        
+        return () => observer.disconnect();
     }, [handleObserver, isPageEnd]);
 
     return (

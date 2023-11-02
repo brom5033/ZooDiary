@@ -80,8 +80,6 @@ export const MyPage: ActivityComponentType = () => {
     };
 
     useEffect(() => {
-        if (!loadMoreRef.current) return;
-
         const option = {
             root: null,
             rootMagin: '0px',
@@ -89,11 +87,11 @@ export const MyPage: ActivityComponentType = () => {
         };
         const observer = new IntersectionObserver(handleObserver, option);
 
-        // eslint-disable-next-line no-unused-expressions
-        loadMoreRef.current && observer.observe(loadMoreRef.current);
+        if (loadMoreRef.current) {
+            observer.observe(loadMoreRef.current);
+        }
 
-        // eslint-disable-next-line consistent-return
-        return () => observer && observer.disconnect();
+        return () => observer.disconnect();
     }, [handleObserver, isPageEnd]);
 
     const gotoWriting = () => push('Writing', { postId: '' });
