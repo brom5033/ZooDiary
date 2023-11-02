@@ -5,43 +5,17 @@ import { useFlow } from 'stackflow';
 // component
 import { AppScreen, SubTitle, Box, CheckBox, Input, Button } from '@components/index';
 import { useLocalStorage, useLogin, useSignUp } from '@hooks/index';
-import { userModel } from '@stores/user';
-import { agreement } from '@constants/agreement';
+import { userModel } from '@stores/index';
+import { agreement, checkMessage } from '@constants/index';
 
 type CheckType = null | 1 | 2 | 3 | 4 | 5 | 6;
 type Check = Record<string, CheckType>;
-interface CheckMessage {
+export interface CheckMessage {
     id: Record<number, string>;
     password: Record<number, string>;
     passwordCheck: Record<number, string>;
     nickName: Record<number, string>;
 }
-
-const checkMessage: CheckMessage = {
-    id: {
-        1: '🐕 2글자 이상 작성해야 해요',
-        2: '🐕 누군가 사용하고 있는 아이디에요',
-        3: '🐕 20글자 미만 작성 해야해요',
-        4: '🐕 특수문자는 사용할 수 없어요',
-        5: '🐕 닉네임과 다른 아이디를 사용해야 해요',
-        6: '🐕 한국어는 아이디로 사용할 수 없어요',
-    },
-    password: {
-        1: '🐕 8글자 이상 작성해야 해요',
-        2: '🐕 누군가 사용하고 있는 닉네임이에요',
-        3: '🐕 40글자 미만 작성해야 해요',
-        4: '🐕 한국어는 비밀번호로 사용할 수 없어요',
-    },
-    passwordCheck: {
-        1: '🐕 비밀번호가 일치하지 않아요',
-    },
-    nickName: {
-        1: '🐕 2글자 이상 작성해야 해요',
-        2: '🐕 누군가 사용하고 있는 닉네임이에요',
-        3: '🐕 20글자 미만 작성해야 해요',
-        4: '🐕 특수문자는 사용할 수 없어요',
-    },
-} as const;
 
 export const SignUp: ActivityComponentType = () => {
     const { replace } = useFlow();

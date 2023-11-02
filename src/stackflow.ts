@@ -2,11 +2,7 @@ import { stackflow } from '@stackflow/react';
 import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic';
 import { basicUIPlugin } from '@stackflow/plugin-basic-ui';
 // Activity
-import { Login } from './activities/Login';
-import { SignUp } from './activities/SignUp';
-import { Writing } from './activities/Writing';
-import { Board } from './activities/Board';
-import { MyPage } from './activities/MyPage';
+import { Login, SignUp, Writing, Board, MyPage } from '@activities/index';
 
 export const { Stack, useFlow } = stackflow({
     transitionDuration: 350,

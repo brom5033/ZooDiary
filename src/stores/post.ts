@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { PostApi } from '@customType/objectRequest';
+import type { PostApi } from '@customType/index';
 
 interface PostModel {
     data: PostApi[];

@@ -1,11 +1,11 @@
 import { type FC, useState } from 'react';
 import { IconButton } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
+import {Logout as LogoutIcon} from '@mui/icons-material';
 import { useFlow } from 'stackflow';
 // component
 import { OverlayMenu,Button } from '@components/index';
-import { useLocalStorage } from '@hooks/useLocalStorage';
-import { userModel } from '@stores/user';
+import { useLocalStorage } from '@hooks/index';
+import { userModel } from '@stores/index';
 
 const style = {
     button: {

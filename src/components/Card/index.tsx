@@ -1,13 +1,12 @@
 import { type FC, useState, useEffect } from 'react';
 import { Card as MUICard, CardHeader, CardContent, CardActions, Typography, Icon } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import type { PostApi } from '@customType/objectRequest';
-import { userModel } from '@stores/user';
-import { useHeart } from '@hooks/api/useHeart';
-import { numberToString } from '@utils/numberToString';
+import { Favorite as FavoriteIcon, FavoriteBorder as FavoriteBorderIcon } from '@mui/icons-material';
 // component
-import { ProfileIcon } from '../ProfileIcon';
+import { userModel } from '@stores/index';
+import { useHeart } from '@hooks/index';
+import { numberToString } from '@utils/index';
+import { ProfileIcon } from '@components/index';
+import type { PostApi } from '@customType/index';
 import { Title } from './Title';
 import { Carousel } from './Carousel';
 import { Action } from './Action';
@@ -49,7 +48,7 @@ export interface Props {
     images?: Image[];
     time: string;
     profileImage?: string;
-    demo?: boolean
+    demo?: boolean;
 }
 
 export const Card: FC<Props> = ({ id, title, labels, bodyText, heart, images, time, profileImage, demo }) => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 // hooks
-import { useLocalStorage } from '@hooks/useLocalStorage';
+import { useLocalStorage } from '@hooks/index';
 
 const [token] = useLocalStorage('token');
 
@@ -16,4 +16,4 @@ instance.interceptors.request.use(async (request) => {
     return request;
 });
 
-export {instance as axios}
+export { instance as axios };

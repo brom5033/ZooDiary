@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 // component
-import { Chip } from '@components/Chip';
-// Props
+import { Chip } from '@components/index';
 import type { Props } from '.';
 
 const labelColor = {
