@@ -1,1 +1,1 @@
-export * from './objectRequest'
+export * from './objectRequest';

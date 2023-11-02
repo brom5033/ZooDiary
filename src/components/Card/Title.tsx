@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Typography } from '@mui/material';
 // props
-import { stringToDday } from '@utils/stringToDday';
+import { stringToDday } from '@utils/index';
 import { Props } from '.';
 
 

@@ -2,8 +2,7 @@ import type { FC, PropsWithChildren } from 'react';
 import { AppScreen as StackFlowAppScreen } from '@stackflow/plugin-basic-ui';
 import { Container, Grid, Typography, Stack, Link } from '@mui/material';
 // component
-import { AppBar, MenuBar, MyPageBar, ButtonBar, Box } from '@components/index';
-import { Card } from './Card';
+import { AppBar, MenuBar, MyPageBar, ButtonBar, Box, Card } from '@components/index';
 
 const style = {
     spacing: {

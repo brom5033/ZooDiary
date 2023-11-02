@@ -3,7 +3,7 @@ import { useFlow } from 'stackflow';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Container, Icon } from '@mui/material';
 // component
-import { Logo } from '@components/Logo';
+import { Logo } from '@components/index';
 
 export const MyPageBar: FC = () => {
     const { push } = useFlow();
@@ -19,7 +19,6 @@ export const MyPageBar: FC = () => {
             zIndex: 1000,
             top: 0,
             backgroundColor: 'white',
-
         },
         button: {
             position: 'absolute',

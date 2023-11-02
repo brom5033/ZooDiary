@@ -3,11 +3,9 @@ import { IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useFlow } from 'stackflow';
 // component
-import { OverlayMenu } from '@components/OverlayMenu';
-import { Button } from '@components/Button';
-import { useDeletePost } from '@hooks/api/useDeletePost';
-import { useGetPost } from '@hooks/api/useGetPost';
-import { postModel } from '@stores/post';
+import { OverlayMenu, Button } from '@components/index';
+import { useDeletePost, useGetPost } from '@hooks/api';
+import { postModel } from '@stores/index';
 
 interface Props {
     id: number;

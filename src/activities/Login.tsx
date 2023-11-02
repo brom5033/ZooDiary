@@ -5,7 +5,7 @@ import { useFlow } from 'stackflow';
 // component
 import { AppScreen, Box, SubTitle, Input, Button } from '@components/index';
 import { useLogin, useLocalStorage } from '@hooks/index';
-import { userModel } from '@stores/user';
+import { userModel } from '@stores/index';
 
 export const Login: ActivityComponentType = () => {
     const { push, replace } = useFlow();

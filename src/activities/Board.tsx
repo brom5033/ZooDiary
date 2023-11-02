@@ -1,15 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
-import { useLocalStorage } from '@hooks/useLocalStorage';
 import { Stack } from '@mui/material';
 import { useFlow } from 'stackflow';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 // component
-import { AppScreen, SubTitle, Hr, Button } from '@components/index';
-import { Card, type Label } from '@components/Card';
-import { useGetPost } from '@hooks/api/useGetPost';
-import { formatDate } from '@utils/date';
-import { postModel } from '@stores/post';
+import { AppScreen, SubTitle, Hr, Button, Card, type Label } from '@components/index';
+import { useGetPost, useLocalStorage } from '@hooks/index';
+import { formatDate } from '@utils/index';
+import { postModel } from '@stores/index';
 
 const style = {
     stack: {

@@ -3,13 +3,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import { Pagination } from 'swiper/modules';
 import { CardMedia, Box as MUIBox } from '@mui/material';
-import { Box } from '@components/Box';
-import { FileUpload } from '@components/FileUpload';
 import { AddPhotoAlternate } from '@mui/icons-material';
 import styled from '@emotion/styled';
-// props
-import { ImageModel } from '@stores/image';
-import { useFileUpload } from '@hooks/api/useFileUpload';
+// component
+import { Box, FileUpload } from '@components/index';
+import { ImageModel } from '@stores/index';
+import { useFileUpload } from '@hooks/api';
 import { Props as CardProps } from '.';
 
 const style = {
