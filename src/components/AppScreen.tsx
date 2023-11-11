@@ -118,11 +118,12 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                                         labels={['기분좋아', '산책 다녀왔어']}
                                         bodyText="오늘은 애견카페를 갔다. 여러 강아지들이랑 열심히 재미있게 놀았다. 또 가고싶다."
                                         heart={generateHeart(10000)}
-                                        time={new Date(new Date().setHours(3)).toString()}
+                                        time={new Date(new Date().setHours(new Date().getHours() - 3)).toString()}
                                         profileImage="/ZooDiary/images/profileImage.jpg"
                                         images={[{ src: '/ZooDiary/images/cookie.jpg', fileName: 'cookie' }]}
                                         demo
                                     />
+                                    {new Date(new Date().setHours(3)).toString()}
                                 </Grid>
                                 <Grid item sx={{ width: '33%' }}>
                                     <Card
@@ -131,7 +132,7 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                                         labels={['평범해']}
                                         bodyText="오늘은 바깥바람을 품에 안겨서 쐬고왔따. 나는 걷고싶었는데...."
                                         heart={generateHeart(10000)}
-                                        time={new Date(new Date().setDate(3)).toString()}
+                                        time={new Date(new Date().setDate(new Date().getDate() - 8)).toString()}
                                         profileImage="/ZooDiary/images/profileImage2.jpg"
                                         images={[{ src: '/ZooDiary/images/cookie2.jpg', fileName: 'cookie' }]}
                                         demo
@@ -144,7 +145,7 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                                         labels={['기분나빠', '간식 먹었어']}
                                         bodyText="미용을 했는데 간식을 조금밖에 안줘서 기분이 별로 안좋았다. 매우 화난다.멍"
                                         heart={generateHeart(10000)}
-                                        time={new Date(new Date().setMinutes(3)).toString()}
+                                        time={new Date(new Date().setMinutes(new Date().getMinutes() - 17)).toString()}
                                         profileImage="/ZooDiary/images/Exdog.jpg"
                                         images={[{ src: '/ZooDiary/images/cookie3.jpg', fileName: 'cookie' }]}
                                         demo
