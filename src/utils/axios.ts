@@ -5,7 +5,7 @@ import { useLocalStorage } from '@hooks/index';
 const [token] = useLocalStorage('token');
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://158.247.242.22:3000',
 });
 
 instance.interceptors.request.use(async (request) => {

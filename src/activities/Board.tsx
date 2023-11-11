@@ -117,7 +117,7 @@ export const Board: ActivityComponentType = () => {
                             bodyText={el.content}
                             heart={el.Heart}
                             time={el.createdAt}
-                            profileImage={`http://localhost:3000${el.user.picture}`}
+                            profileImage={`http://158.247.242.22:3000${el.user.picture}`}
                         />
                     );
                 })}

@@ -93,7 +93,7 @@ export const Carousel: FC<Props> = ({ images, upload, demo }) => {
                             <FileUpload onChange={handleChange}>
                                 <CardMedia
                                     component="img"
-                                    src={`${demo ? '' : 'http://localhost:3000'}${src}`}
+                                    src={`${demo ? '' : 'http://158.247.242.22:3000'}${src}`}
                                     alt={fileName}
                                     width="100%"
                                 />
@@ -104,7 +104,7 @@ export const Carousel: FC<Props> = ({ images, upload, demo }) => {
                             <div style={style.imageWrap}>
                                 <CardMedia
                                     component="img"
-                                    src={`${demo ? '' : 'http://localhost:3000'}${src}`}
+                                    src={`${demo ? '' : 'http://158.247.242.22:3000'}${src}`}
                                     alt={fileName}
                                     width="100%"
                                 />
