@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://brom5033.github.io/zoodiary",
+  "homepage": "http://zoodiary.kro.kr/",
   "scripts": {
     "dev": "vite --port 80 --host 0.0.0.0",
     "build": "tsc && vite build",
