@@ -123,7 +123,6 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                                         images={[{ src: '/ZooDiary/images/cookie.jpg', fileName: 'cookie' }]}
                                         demo
                                     />
-                                    {new Date(new Date().setHours(3)).toString()}
                                 </Grid>
                                 <Grid item sx={{ width: '33%' }}>
                                     <Card
