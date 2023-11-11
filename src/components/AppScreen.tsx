@@ -51,7 +51,7 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                                         <Typography>반려동물과의 일상을 공유해보아요.</Typography>
                                         <Typography>행복한 날, 기록해보아요.</Typography>
                                         <img
-                                            src="/images/lovedog.jpg"
+                                            src="/ZooDiary/images/lovedog.jpg"
                                             alt="강아지 사진"
                                             style={{ maxHeight: '250px', objectFit: 'cover', borderRadius: '35px' }}
                                         />
@@ -63,7 +63,7 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                                         <Typography>반려동물과 함께 살아가는 보호자분</Typography>
                                         <Typography>함께 소통하고 정보를 공유해요.</Typography>
                                         <img
-                                            src="/images/flowerdog.jpg"
+                                            src="/ZooDiary/images/flowerdog.jpg"
                                             alt="강아지 사진"
                                             style={{ maxHeight: '250px', objectFit: 'cover', borderRadius: '35px' }}
                                         />
@@ -119,8 +119,8 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                                         bodyText="오늘은 애견카페를 갔다. 여러 강아지들이랑 열심히 재미있게 놀았다. 또 가고싶다."
                                         heart={generateHeart(10000)}
                                         time={new Date(new Date().setHours(3)).toString()}
-                                        profileImage="/images/profileImage.jpg"
-                                        images={[{ src: '/images/cookie.jpg', fileName: 'cookie' }]}
+                                        profileImage="/ZooDiary/images/profileImage.jpg"
+                                        images={[{ src: '/ZooDiary/images/cookie.jpg', fileName: 'cookie' }]}
                                         demo
                                     />
                                 </Grid>
@@ -132,8 +132,8 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                                         bodyText="오늘은 바깥바람을 품에 안겨서 쐬고왔따. 나는 걷고싶었는데...."
                                         heart={generateHeart(10000)}
                                         time={new Date(new Date().setDate(3)).toString()}
-                                        profileImage="/images/profileImage2.jpg"
-                                        images={[{ src: '/images/cookie2.jpg', fileName: 'cookie' }]}
+                                        profileImage="/ZooDiary/images/profileImage2.jpg"
+                                        images={[{ src: '/ZooDiary/images/cookie2.jpg', fileName: 'cookie' }]}
                                         demo
                                     />
                                 </Grid>
@@ -145,8 +145,8 @@ export const AppScreen: FC<Props> = ({ children, main, sub, page, logout }) => {
                                         bodyText="미용을 했는데 간식을 조금밖에 안줘서 기분이 별로 안좋았다. 매우 화난다.멍"
                                         heart={generateHeart(10000)}
                                         time={new Date(new Date().setMinutes(3)).toString()}
-                                        profileImage="/images/Exdog.jpg"
-                                        images={[{ src: '/images/cookie3.jpg', fileName: 'cookie' }]}
+                                        profileImage="/ZooDiary/images/Exdog.jpg"
+                                        images={[{ src: '/ZooDiary/images/cookie3.jpg', fileName: 'cookie' }]}
                                         demo
                                     />
                                 </Grid>
