@@ -78,7 +78,7 @@ export const Board: ActivityComponentType = () => {
     useEffect(() => {
         const option = {
             root: null,
-            rootMagin: '0px',
+            rootMargin: '0px',
             threshold: 0.5,
         };
         const observer = new IntersectionObserver(handleObserver, option);

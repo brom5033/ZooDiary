@@ -42,7 +42,7 @@ export const userModel = create<UserModel>()(
         }),
         {
             name: 'store',
-            storage: createJSONStorage(() => sessionStorage),
+            storage: createJSONStorage(() => localStorage),
         },
     ),
 );
