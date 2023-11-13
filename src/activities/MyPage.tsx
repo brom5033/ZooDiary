@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import type { ActivityComponentType } from '@stackflow/react';
 import { Stack } from '@mui/material';
 import { useFlow } from 'stackflow';
-import EditNoteIcon from '@mui/icons-material/EditNote';
 // component
-import { AppScreen, SubTitle, Hr, Button, ProfileImage, Card, type Label } from '@components/index';
+import { AppScreen, SubTitle, Hr, ProfileImage, Card, type Label } from '@components/index';
 import { useGetMyPost, useLocalStorage } from '@hooks/index';
 import { formatDate } from '@utils/index';
 import { myPostModel } from '@stores/index';
@@ -13,16 +12,6 @@ const style = {
     stack: {
         width: '100%',
         height: 'min-content',
-    },
-    box: {
-        width: '60px',
-        position: 'sticky',
-        bottom: '20px',
-        marginLeft: 'auto',
-        zIndex: 1000,
-    },
-    iconColor: {
-        color: '#353537',
     },
     imageWrap: {
         alignItems: 'center',
@@ -42,7 +31,7 @@ export const MyPage: ActivityComponentType = () => {
     const [isPageEnd, setIsPageEnd] = useState<boolean>(true);
     const [page, setPage] = useState(1);
 
-    const { push, replace } = useFlow();
+    const { replace } = useFlow();
 
     useEffect(() => {
         if (!token()) {
@@ -94,8 +83,6 @@ export const MyPage: ActivityComponentType = () => {
         return () => observer.disconnect();
     }, [handleObserver, isPageEnd]);
 
-    const gotoWriting = () => push('Writing', { postId: '' });
-
     return (
         <AppScreen logout>
             <Stack sx={style.stack} gap="30px">
@@ -134,11 +121,6 @@ export const MyPage: ActivityComponentType = () => {
                     );
                 })}
                 <div>{!isPageEnd && <div ref={loadMoreRef} />}</div>
-                <div style={style.box}>
-                    <Button border onClick={gotoWriting}>
-                        <EditNoteIcon sx={style.iconColor} />
-                    </Button>
-                </div>
             </Stack>
         </AppScreen>
     );

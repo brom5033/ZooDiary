@@ -3,7 +3,7 @@ import type { ActivityComponentType } from '@stackflow/react';
 import { Stack, CircularProgress } from '@mui/material';
 import { useFlow } from 'stackflow';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import ReactPullToRefresh from 'react-pull-to-refresh';
+import { PullToRefresh } from 'react-js-pull-to-refresh';
 // component
 import { AppScreen, SubTitle, Hr, Button, Card, type Label } from '@components/index';
 import { useGetPost, useLocalStorage } from '@hooks/index';
@@ -36,7 +36,6 @@ export const Board: ActivityComponentType = () => {
     const loadMoreRef = useRef<HTMLDivElement>(null);
     const [isPageEnd, setIsPageEnd] = useState<boolean>(true);
     const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
 
     const { push, replace } = useFlow();
 
@@ -92,24 +91,42 @@ export const Board: ActivityComponentType = () => {
         return () => observer.disconnect();
     }, [handleObserver, isPageEnd]);
 
-    const sleep = (ms: number) => new Promise((resolve) => {setTimeout(resolve, ms)});
+    const sleep = (ms: number) =>
+        new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        });
 
     const handleRefresh = async () => {
-        setLoading(true);
         await sleep(1000);
         await useGetPost().then((response) => {
             postModelStore.setPost(response.data.data);
             setIsPageEnd(false);
-            setLoading(false);
         });
     };
 
     return (
         <AppScreen page>
-            <ReactPullToRefresh
+            <PullToRefresh
                 onRefresh={handleRefresh}
-                style={{ width: '100%' }}
-                loading={loading && <CircularProgress />}
+                pullDownContent={
+                    <div style={{ textAlign: 'center' }}>
+                        <CircularProgress />
+                    </div>
+                }
+                refreshContent={
+                    <div style={{ textAlign: 'center' }}>
+                        <CircularProgress />
+                    </div>
+                }
+                releaseContent={
+                    <div style={{ textAlign: 'center' }}>
+                        <CircularProgress />
+                    </div>
+                }
+                pullDownThreshold={50}
+                triggerHeight="auto"
+                backgroundColor="white"
+                startInvisible
             >
                 <Stack sx={style.stack} gap="60px">
                     <Stack>
@@ -147,7 +164,7 @@ export const Board: ActivityComponentType = () => {
                         </Button>
                     </div>
                 </Stack>
-            </ReactPullToRefresh>
+            </PullToRefresh>
         </AppScreen>
     );
 };
