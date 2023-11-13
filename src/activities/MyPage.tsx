@@ -129,7 +129,7 @@ export const MyPage: ActivityComponentType = () => {
                             bodyText={el.content}
                             heart={el.Heart}
                             time={el.createdAt}
-                            profileImage={`http://158.247.242.22:3000${el.user.picture}`}
+                            profileImage={`http://api.zoodiary.kro.kr:3000${el.user.picture}`}
                         />
                     );
                 })}
