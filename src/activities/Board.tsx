@@ -1,11 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
-import type { ActivityComponentType } from '@stackflow/react';
+import { type ActivityComponentType } from '@stackflow/react';
 import { Stack, CircularProgress } from '@mui/material';
 import { useFlow } from 'stackflow';
-import EditNoteIcon from '@mui/icons-material/EditNote';
 import { PullToRefresh } from 'react-js-pull-to-refresh';
 // component
-import { AppScreen, SubTitle, Hr, Button, Card, type Label } from '@components/index';
+import { AppScreen, SubTitle, Hr, Card, type Label } from '@components/index';
 import { useGetPost, useLocalStorage } from '@hooks/index';
 import { formatDate } from '@utils/index';
 import { postModel } from '@stores/index';
@@ -15,16 +14,6 @@ const style = {
         width: '100%',
         maxWidth: '1000px',
         height: 'min-content',
-    },
-    box: {
-        width: '60px',
-        position: 'sticky',
-        bottom: '20px',
-        marginLeft: 'auto',
-        zIndex: 1000,
-    },
-    iconColor: {
-        color: '#353537',
     },
 } as const;
 
@@ -37,7 +26,7 @@ export const Board: ActivityComponentType = () => {
     const [isPageEnd, setIsPageEnd] = useState<boolean>(true);
     const [page, setPage] = useState(1);
 
-    const { push, replace } = useFlow();
+    const { replace } = useFlow();
 
     useEffect(() => {
         if (!token()) {
@@ -49,8 +38,6 @@ export const Board: ActivityComponentType = () => {
             setIsPageEnd(false);
         });
     }, []);
-
-    const gotoWriting = () => push('Writing', { postId: '' });
 
     const handleObserver = async ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
         if (entry.isIntersecting) {
@@ -158,11 +145,6 @@ export const Board: ActivityComponentType = () => {
                         );
                     })}
                     <div>{!isPageEnd && <div ref={loadMoreRef} />}</div>
-                    <div style={style.box}>
-                        <Button border onClick={gotoWriting}>
-                            <EditNoteIcon sx={style.iconColor} />
-                        </Button>
-                    </div>
                 </Stack>
             </PullToRefresh>
         </AppScreen>
