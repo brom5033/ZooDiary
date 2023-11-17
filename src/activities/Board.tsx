@@ -144,7 +144,11 @@ export const Board: ActivityComponentType = () => {
                             />
                         );
                     })}
-                    <div>{!isPageEnd && <div ref={loadMoreRef} />}</div>
+
+                    <div>
+                        {!isPageEnd && <div ref={loadMoreRef} />}
+                        <br />
+                    </div>
                 </Stack>
             </PullToRefresh>
         </AppScreen>
