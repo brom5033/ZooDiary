@@ -9,6 +9,7 @@ interface Props extends PropsWithChildren {
 
 export const OverlayMenu: FC<Props> = ({ children, action, open, setOpen }) => {
     const toggleOpen = () => setOpen?.((prev) => !prev);
+
     return (
         <>
             <div aria-hidden="true" onClick={toggleOpen}>{action}</div>

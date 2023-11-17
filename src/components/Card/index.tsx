@@ -86,7 +86,7 @@ export const Card: FC<Props> = ({ id, title, labels, bodyText, heart, images, ti
             <CardHeader
                 avatar={<ProfileIcon src={profileImage} alt={title} />}
                 title={<Title time={time} title={title} />}
-                action={<Action id={id} />}
+                action={userModelStore.getUser().nickName === title && <Action id={id} />}
             />
             <Carousel demo={demo} images={images} />
             {labels.length > 0 && <Label labels={labels} />}
