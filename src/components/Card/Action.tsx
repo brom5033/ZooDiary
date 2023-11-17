@@ -21,7 +21,7 @@ export const Action: FC<Props> = ({ id }) => {
     const handleDeleteClick = () => {
         useDeletePost(id).then(() => {
             useGetPost().then((response) => {
-                postModelStore.setPost(response.data.data);
+                postModelStore.setPost(response.data);
                 setOpen(false);
             });
         });

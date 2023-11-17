@@ -34,7 +34,7 @@ export const Board: ActivityComponentType = () => {
         }
 
         useGetPost().then((response) => {
-            postModelStore.setPost(response.data.data);
+            postModelStore.setPost(response.data);
             setIsPageEnd(false);
         });
     }, []);
@@ -46,16 +46,16 @@ export const Board: ActivityComponentType = () => {
             setIsPageEnd(true);
 
             await useGetPost(page * 10, page * 10 + 10).then((response) => {
-                if (response.data.data.length === 0) {
+                if (response.data.length === 0) {
                     setIsPageEnd(true);
                     return;
                 }
-                const responseArray = response.data.data.slice(0, 9);
+                const responseArray = response.data.slice(0, 9);
 
                 postModelStore.setPost(postModelStore.getPost().concat(responseArray));
                 setPage(page + 1);
 
-                if (response.data.data.length !== 0) {
+                if (response.data.length !== 0) {
                     setIsPageEnd(false);
                 }
             });
@@ -86,7 +86,7 @@ export const Board: ActivityComponentType = () => {
     const handleRefresh = async () => {
         await sleep(1000);
         await useGetPost().then((response) => {
-            postModelStore.setPost(response.data.data);
+            postModelStore.setPost(response.data);
             setIsPageEnd(false);
         });
     };

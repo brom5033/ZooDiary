@@ -39,7 +39,7 @@ export const MyPage: ActivityComponentType = () => {
         }
 
         useGetMyPost().then((response) => {
-            myPostModelStore.setPost(response.data.data);
+            myPostModelStore.setPost(response.data);
             setIsPageEnd(false);
         });
     }, []);
@@ -51,16 +51,16 @@ export const MyPage: ActivityComponentType = () => {
             setIsPageEnd(true);
 
             await useGetMyPost(page * 10, page * 10 + 10).then((response) => {
-                if (response.data.data.length === 0) {
+                if (response.data.length === 0) {
                     setIsPageEnd(true);
                     return;
                 }
-                const responseArray = response.data.data.slice(0, 9);
+                const responseArray = response.data.slice(0, 9);
 
                 myPostModelStore.setPost(myPostModelStore.getPost().concat(responseArray));
                 setPage(page + 1);
 
-                if (response.data.data.length !== 0) {
+                if (response.data.length !== 0) {
                     setIsPageEnd(false);
                 }
             });

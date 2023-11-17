@@ -122,14 +122,14 @@ export const Writing: ActivityComponentType<Props> = ({ params }) => {
         if (isEditMode) {
             useUpdatePost(parseInt(params.postId, 10), content, picture, chips).then(() => {
                 useGetPost().then((response) => {
-                    postModelStore.setPost(response.data.data);
+                    postModelStore.setPost(response.data);
                     pop();
                 });
             });
         } else {
             usePostWrite(picture, content, chips).then(() => {
                 useGetPost().then((response) => {
-                    postModelStore.setPost(response.data.data);
+                    postModelStore.setPost(response.data);
                     pop();
                 });
             });

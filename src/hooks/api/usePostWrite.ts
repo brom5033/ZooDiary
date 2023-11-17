@@ -1,9 +1,11 @@
-import { axios } from '@utils/axios';
+import { ky } from '@utils/ky';
 
 export const usePostWrite = (picture: string, content: string, chips: string) => {
-    return axios.post('http://api.zoodiary.kro.kr:3000/api/v1/post', {
-        picture,
-        content,
-        chips,
-    });
+    return ky.post('http://api.zoodiary.kro.kr:3000/api/v1/post', {
+        json: {
+            picture,
+            content,
+            chips,
+        },
+    }).json();
 };

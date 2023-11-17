@@ -1,5 +1,5 @@
-import { axios } from '@utils/axios';
+import { ky } from '@utils/ky';
 
 export const useHeart = (id: number) => {
-    return axios.post(`http://api.zoodiary.kro.kr:3000/api/v1/heart/${id}`);
+    return ky.post(`http://api.zoodiary.kro.kr:3000/api/v1/heart/${id}`).json();
 };

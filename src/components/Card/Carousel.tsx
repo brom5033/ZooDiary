@@ -62,7 +62,7 @@ export const Carousel: FC<Props> = ({ images, upload, demo }) => {
             };
 
             useFileUpload(file).then((response) => {
-                imageModelStore.setImage(index, response.data.data, carouselImages[index].fileName);
+                imageModelStore.setImage(index, response.data, carouselImages[index].fileName);
             });
 
             setCarouselImages([...carouselImages]);

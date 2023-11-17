@@ -14,7 +14,7 @@ export const ProfileImage: FC = () => {
         reader.onload = ({ target }) => {
             setSrc(target?.result as string);
             useFileUpload(file).then((response) => {
-                usePutProfile(response.data.data);
+                usePutProfile(response.data);
             });
         };
         reader.readAsDataURL(file);

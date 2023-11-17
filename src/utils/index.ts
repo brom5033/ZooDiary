@@ -1,4 +1,4 @@
-export * from './axios';
+export * from './ky';
 export * from './date';
 export * from './numberToString';
 export * from './stringToDday';
