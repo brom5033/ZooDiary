@@ -2,6 +2,8 @@
 
 반려동물의 일상을 기록하고 공유할 수 있습니다. 서로의 일상에 공감해보세요.
 
+<img src="webpage.png" alt="zoodiary"/>
+
 ## Requirement
 ```
 typescript, react, vite, ESLint, prettier, commitLint, husky, stackflow, mui, swagger, zustand, emotion, pwa
